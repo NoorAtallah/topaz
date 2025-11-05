@@ -30,7 +30,7 @@ const Navbar = () => {
     { name: 'Services', href: '/services', code: '01' },
     { name: 'Pricing Plans', href: '/pricing', code: '02' },
     { name: 'About Us', href: '/about', code: '03' },
-    { name: 'Blogs', href: '/blogs', code: '04' },
+   
     { name: 'FAQ', href: '/faq', code: '05' },
     { name: 'Terms & Conditions', href: '/terms', code: '06' },
     { name: 'Privacy Policy', href: '/privacy', code: '07' },
