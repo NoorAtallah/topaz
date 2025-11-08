@@ -30,7 +30,6 @@ const Navbar = () => {
     { name: 'Services', href: '/services', code: '01' },
     { name: 'Pricing Plans', href: '/pricing', code: '02' },
     { name: 'About Us', href: '/about', code: '03' },
-   
     { name: 'FAQ', href: '/faq', code: '05' },
     { name: 'Terms & Conditions', href: '/terms', code: '06' },
     { name: 'Privacy Policy', href: '/privacy', code: '07' },
@@ -43,24 +42,24 @@ const Navbar = () => {
       transition={{ duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? 'bg-black/95 backdrop-blur-2xl shadow-lg shadow-[#8C5695]/20'
-          : 'bg-black/60 backdrop-blur-md'
+          ? 'bg-white/95 backdrop-blur-2xl shadow-lg shadow-[#8C5695]/10'
+          : 'bg-white/80 backdrop-blur-md'
       }`}
     >
-      {/* Cyberpunk Grid Background */}
-      <div className="absolute inset-0 opacity-10">
+      {/* Light Grid Background */}
+      <div className="absolute inset-0 opacity-[0.03]">
         <div className="h-full w-full bg-[linear-gradient(90deg,rgba(140,86,149,0.3)_1px,transparent_1px),linear-gradient(0deg,rgba(140,86,149,0.3)_1px,transparent_1px)] bg-[size:20px_20px]" />
       </div>
 
-      {/* Scanline Effect */}
+      {/* Subtle Scanline Effect */}
       <motion.div
         animate={{ y: ['-100%', '200%'] }}
         transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
-        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-[#8C5695]/10 to-transparent"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-[#8C5695]/5 to-transparent"
       />
 
       {/* Top Border with Running Light */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#8C5695]/50 to-transparent">
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#8C5695]/30 to-transparent">
         <motion.div
           animate={{ x: ['-100%', '200%'] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
@@ -96,7 +95,7 @@ const Navbar = () => {
                     />
                     <polygon
                       points="50,15 80,32.5 80,67.5 50,85 20,67.5 20,32.5"
-                      fill="rgba(140,86,149,0.1)"
+                      fill="rgba(140,86,149,0.05)"
                       stroke="url(#logo-grad)"
                       strokeWidth="1"
                     />
@@ -114,7 +113,7 @@ const Navbar = () => {
                 <motion.div
                   animate={{
                     scale: [1, 1.2, 1],
-                    opacity: [0.3, 0.6, 0.3],
+                    opacity: [0.1, 0.2, 0.1],
                   }}
                   transition={{ duration: 2, repeat: Infinity }}
                   className="absolute inset-0 rounded-full bg-[#8C5695] blur-xl"
@@ -130,13 +129,13 @@ const Navbar = () => {
               {/* Logo Text with Glitch */}
               <div className="flex flex-col">
                 <div className="relative">
-                  <span className="font-black text-xl tracking-tighter text-white mr-8">
+                  <span className="font-black text-xl tracking-tighter text-gray-900 mr-8">
                     TOPAZ
                   </span>
                   <motion.span
                     animate={{
                       x: [-1, 1, -1],
-                      opacity: [0, 0.5, 0],
+                      opacity: [0, 0.3, 0],
                     }}
                     transition={{
                       duration: 0.2,
@@ -177,14 +176,14 @@ const Navbar = () => {
           {/* Right Side Tech Display */}
           <div className="hidden lg:flex items-center gap-4">
             {/* System Status */}
-            <div className="flex items-center gap-3 rounded-lg border border-[#8C5695]/20 bg-black/50 px-4 py-2 backdrop-blur-sm">
+            <div className="flex items-center gap-3 rounded-lg border border-[#8C5695]/20 bg-white/80 px-4 py-2 backdrop-blur-sm shadow-sm">
               <div className="flex flex-col items-end">
-                <span className="font-mono text-[10px] text-white/40">SYSTEM</span>
+                <span className="font-mono text-[10px] text-gray-500">SYSTEM</span>
                 <div className="flex items-center gap-1.5">
                   <motion.div
                     animate={{
                       boxShadow: [
-                        '0 0 0 0 rgba(140, 86, 149, 0.7)',
+                        '0 0 0 0 rgba(140, 86, 149, 0.4)',
                         '0 0 0 4px rgba(140, 86, 149, 0)',
                       ],
                     }}
@@ -196,8 +195,8 @@ const Navbar = () => {
               </div>
               <div className="h-8 w-[1px] bg-[#8C5695]/20" />
               <div className="flex flex-col">
-                <span className="font-mono text-[10px] text-white/40">LOCAL TIME</span>
-                <span className="font-mono text-xs font-bold text-white">
+                <span className="font-mono text-[10px] text-gray-500">LOCAL TIME</span>
+                <span className="font-mono text-xs font-bold text-gray-900">
                   {time.toLocaleTimeString('en-US', { hour12: false })}
                 </span>
               </div>
@@ -207,26 +206,26 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden relative h-11 w-11 rounded-lg border border-[#8C5695]/30 bg-black/50 backdrop-blur-sm hover:border-[#8C5695] hover:bg-[#8C5695]/10 transition-all overflow-hidden group"
+            className="lg:hidden relative h-11 w-11 rounded-lg border border-[#8C5695]/30 bg-white/80 backdrop-blur-sm hover:border-[#8C5695] hover:bg-[#8C5695]/5 transition-all overflow-hidden group shadow-sm"
             aria-label="Toggle menu"
           >
             {/* Button Grid Background */}
-            <div className="absolute inset-0 opacity-30 group-hover:opacity-50 transition-opacity">
+            <div className="absolute inset-0 opacity-20 group-hover:opacity-30 transition-opacity">
               <div className="h-full w-full bg-[linear-gradient(90deg,rgba(140,86,149,0.3)_1px,transparent_1px),linear-gradient(0deg,rgba(140,86,149,0.3)_1px,transparent_1px)] bg-[size:4px_4px]" />
             </div>
 
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-5">
               <motion.div
                 animate={isMobileMenuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
-                className="h-0.5 w-5 bg-gradient-to-r from-[#8C5695] to-[#986AA1] rounded-full shadow-[0_0_8px_rgba(140,86,149,0.8)]"
+                className="h-0.5 w-5 bg-gradient-to-r from-[#8C5695] to-[#986AA1] rounded-full shadow-[0_0_8px_rgba(140,86,149,0.5)]"
               />
               <motion.div
                 animate={isMobileMenuOpen ? { opacity: 0, x: -10 } : { opacity: 1, x: 0 }}
-                className="mt-1.5 h-0.5 w-5 bg-gradient-to-r from-[#8C5695] to-[#986AA1] rounded-full shadow-[0_0_8px_rgba(140,86,149,0.8)]"
+                className="mt-1.5 h-0.5 w-5 bg-gradient-to-r from-[#8C5695] to-[#986AA1] rounded-full shadow-[0_0_8px_rgba(140,86,149,0.5)]"
               />
               <motion.div
                 animate={isMobileMenuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
-                className="mt-1.5 h-0.5 w-5 bg-gradient-to-r from-[#8C5695] to-[#986AA1] rounded-full shadow-[0_0_8px_rgba(140,86,149,0.8)]"
+                className="mt-1.5 h-0.5 w-5 bg-gradient-to-r from-[#8C5695] to-[#986AA1] rounded-full shadow-[0_0_8px_rgba(140,86,149,0.5)]"
               />
             </div>
           </button>
@@ -241,10 +240,10 @@ const Navbar = () => {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="lg:hidden overflow-hidden border-t border-[#8C5695]/20 bg-black/98 backdrop-blur-2xl"
+            className="lg:hidden overflow-hidden border-t border-[#8C5695]/20 bg-white/98 backdrop-blur-2xl"
           >
             {/* Mobile Menu Grid Background */}
-            <div className="absolute inset-0 opacity-5">
+            <div className="absolute inset-0 opacity-[0.03]">
               <div className="h-full w-full bg-[linear-gradient(90deg,rgba(140,86,149,0.5)_1px,transparent_1px),linear-gradient(0deg,rgba(140,86,149,0.5)_1px,transparent_1px)] bg-[size:20px_20px]" />
             </div>
 
@@ -262,13 +261,13 @@ const Navbar = () => {
                       onClick={() => setIsMobileMenuOpen(false)}
                       className={`group relative block overflow-hidden rounded-lg px-4 py-4 font-mono text-sm transition-all ${
                         pathname === item.href
-                          ? 'bg-gradient-to-r from-[#8C5695]/20 to-[#986AA1]/20 text-white border border-[#8C5695]/50'
-                          : 'text-white/70 hover:text-white border border-transparent hover:border-[#8C5695]/30 hover:bg-white/5'
+                          ? 'bg-gradient-to-r from-[#8C5695]/10 to-[#986AA1]/10 text-gray-900 border border-[#8C5695]/50'
+                          : 'text-gray-700 hover:text-gray-900 border border-transparent hover:border-[#8C5695]/30 hover:bg-gray-50'
                       }`}
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
-                          <span className="font-bold text-[#8C5695] opacity-50">[{item.code}]</span>
+                          <span className="font-bold text-[#8C5695] opacity-60">[{item.code}]</span>
                           <span className="font-medium">{item.name}</span>
                         </div>
                         <motion.span
@@ -282,7 +281,7 @@ const Navbar = () => {
                       
                       {/* Hover Scan Line */}
                       <motion.div
-                        className="absolute inset-0 bg-gradient-to-r from-transparent via-[#8C5695]/20 to-transparent opacity-0 group-hover:opacity-100"
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-[#8C5695]/10 to-transparent opacity-0 group-hover:opacity-100"
                         animate={{ x: ['-100%', '100%'] }}
                         transition={{ duration: 1.5, repeat: Infinity }}
                       />
@@ -292,7 +291,7 @@ const Navbar = () => {
               </div>
 
               {/* Mobile System Status */}
-              <div className="mt-6 rounded-lg border border-[#8C5695]/20 bg-black/50 p-4">
+              <div className="mt-6 rounded-lg border border-[#8C5695]/20 bg-white/80 p-4 shadow-sm">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <motion.div
@@ -300,7 +299,7 @@ const Navbar = () => {
                       transition={{ duration: 2, repeat: Infinity }}
                       className="h-2 w-2 rounded-full bg-[#8C5695]"
                     />
-                    <span className="font-mono text-xs text-white/60">SYSTEM STATUS</span>
+                    <span className="font-mono text-xs text-gray-600">SYSTEM STATUS</span>
                   </div>
                   <span className="font-mono text-xs font-bold text-[#8C5695]">OPERATIONAL</span>
                 </div>
@@ -311,7 +310,7 @@ const Navbar = () => {
       </AnimatePresence>
 
       {/* Bottom Border with Data Stream */}
-      <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#8C5695]/30 to-transparent">
+      <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#8C5695]/20 to-transparent">
         <motion.div
           animate={{ x: ['100%', '-100%'] }}
           transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
@@ -339,22 +338,22 @@ const NavLink = ({ item, index, isActive }) => {
         {/* Background Panel */}
         <div className={`absolute inset-0 rounded-lg border transition-all ${
           isActive 
-            ? 'border-[#8C5695]/50 bg-[#8C5695]/10' 
+            ? 'border-[#8C5695]/50 bg-[#8C5695]/10 shadow-sm' 
             : 'border-transparent group-hover:border-[#8C5695]/30 group-hover:bg-[#8C5695]/5'
         }`}>
           {/* Tech Grid */}
-          <div className="absolute inset-0 opacity-20">
+          <div className="absolute inset-0 opacity-10">
             <div className="h-full w-full bg-[linear-gradient(90deg,rgba(140,86,149,0.3)_1px,transparent_1px),linear-gradient(0deg,rgba(140,86,149,0.3)_1px,transparent_1px)] bg-[size:4px_4px]" />
           </div>
         </div>
 
         {/* Content */}
         <div className="relative z-10 flex items-center gap-2">
-          <span className="font-mono text-[10px] text-[#8C5695] opacity-60">[{item.code}]</span>
+          <span className="font-mono text-[10px] text-[#8C5695] opacity-70">[{item.code}]</span>
           <span className={`font-mono text-xs font-medium transition-all ${
             isActive 
-              ? 'text-white' 
-              : 'text-white/60 group-hover:text-white'
+              ? 'text-gray-900' 
+              : 'text-gray-600 group-hover:text-gray-900'
           }`}>
             {item.name}
           </span>
@@ -381,7 +380,7 @@ const NavLink = ({ item, index, isActive }) => {
             initial={{ x: '-100%' }}
             animate={{ x: '100%' }}
             transition={{ duration: 0.6 }}
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-[#8C5695]/20 to-transparent"
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-[#8C5695]/10 to-transparent"
           />
         )}
 

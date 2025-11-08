@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useEffect, useRef, useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
 
 const HeroSection = () => {
   const containerRef = useRef(null);
@@ -14,24 +15,32 @@ const HeroSection = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
-    <div ref={containerRef} className="relative h-screen overflow-hidden bg-black">
-      {/* Optimized Three.js 3D Background */}
-      <ThreeBackground />
+    <div ref={containerRef} className="relative h-screen overflow-hidden bg-gradient-to-br from-white via-purple-50/30 to-white">
+      {/* Background Paths Animation */}
+      <BackgroundPaths />
       
-      {/* Simplified Static Hexagon Grid */}
-      <HexagonGrid />
+      {/* Animated Grid Overlay */}
+      <div className="absolute inset-0 opacity-[0.03]">
+        <div className="h-full w-full" style={{
+          backgroundImage: `linear-gradient(#8C5695 1px, transparent 1px), linear-gradient(90deg, #8C5695 1px, transparent 1px)`,
+          backgroundSize: '50px 50px'
+        }} />
+      </div>
       
-      {/* Reduced Data Streams */}
-      <DataStreams />
+      {/* Floating Orbs */}
+      <FloatingOrbs />
       
       {/* Combined Overlays */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60" />
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle,transparent_40%,black_100%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-white/60" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle,transparent_40%,white_100%)]" />
       </div>
       
       {/* Static Corner Decorations */}
       <CornerDecorations />
+      
+      {/* Animated Border Lines */}
+      <AnimatedBorders />
 
       {/* Main Content */}
       <motion.div 
@@ -47,26 +56,33 @@ const HeroSection = () => {
         >
           <div className="inline-flex items-center gap-3 rounded-full border border-[#8C5695]/40 bg-[#8C5695]/5 px-6 py-2 backdrop-blur-md">
             <div className="h-2 w-2 rounded-full bg-[#8C5695] animate-pulse" />
-            <span className="font-mono text-sm font-medium tracking-wider text-white/90">
+            <span className="font-mono text-sm font-medium tracking-wider text-[#8C5695]">
               NEXT-GEN INFRASTRUCTURE
             </span>
           </div>
         </motion.div>
 
-        {/* Main Heading with Simplified Glitch */}
+        {/* Main Heading with Enhanced Effects */}
         <div className="relative mb-6">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
-            className="relative text-6xl font-black uppercase tracking-tight text-white sm:text-7xl md:text-8xl lg:text-9xl"
+            className="relative text-6xl font-black uppercase tracking-tight sm:text-7xl md:text-8xl lg:text-9xl"
           >
-            <span className="relative inline-block">
-              <span className="relative z-10 drop-shadow-[0_0_30px_rgba(140,86,149,0.8)]">TOPAZ</span>
-              {/* Simplified glitch effect - only on hover */}
-              <span className="absolute left-0 top-0 z-0 text-[#8C5695] opacity-0 hover:opacity-50 transition-opacity">
+            <span className="relative inline-block group">
+              {/* Main text with gradient */}
+              <span className="relative z-10 bg-gradient-to-br from-[#8C5695] via-[#986AA1] to-[#8C5695] bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(140,86,149,0.4)]">
                 TOPAZ
               </span>
+              {/* Glowing background effect */}
+              <span className="absolute inset-0 blur-3xl opacity-30 bg-gradient-to-r from-[#8C5695] to-[#986AA1]">
+                TOPAZ
+              </span>
+              {/* Animated underline on hover */}
+              <motion.span 
+                className="absolute -bottom-2 left-0 h-1 w-0 bg-gradient-to-r from-[#8C5695] to-[#986AA1] group-hover:w-full transition-all duration-500"
+              />
             </span>
           </motion.h1>
           
@@ -74,28 +90,53 @@ const HeroSection = () => {
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
             transition={{ duration: 1, delay: 1.2 }}
-            className="mx-auto mt-4 h-1 w-64 origin-center bg-gradient-to-r from-transparent via-[#8C5695] to-transparent"
-          />
+            className="mx-auto mt-6 h-1 w-64 origin-center bg-gradient-to-r from-transparent via-[#8C5695] to-transparent relative overflow-hidden"
+          >
+            <motion.div
+              animate={{ x: ['-100%', '100%'] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+              className="absolute inset-0 w-1/2 bg-gradient-to-r from-transparent via-white to-transparent"
+            />
+          </motion.div>
         </div>
 
-        {/* Subtitle - Static after animation */}
+        {/* Enhanced Subtitle */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 1.4 }}
           className="mb-12 max-w-3xl"
         >
-          <p className="font-mono text-xl text-white/80 md:text-2xl">
+          <p className="font-mono text-xl font-semibold text-gray-800 md:text-2xl leading-relaxed">
             Powerful VPS Hosting & Professional Server Solutions
           </p>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 2 }}
-            className="mt-4 text-base text-white/60 md:text-lg"
+            className="mt-4 text-base text-gray-600 md:text-lg max-w-2xl mx-auto leading-relaxed"
           >
             Enterprise-grade infrastructure built for developers, businesses, and innovators
           </motion.p>
+          
+          {/* Decorative dots */}
+          <div className="flex items-center justify-center gap-2 mt-6">
+            <motion.div 
+              animate={{ scale: [1, 1.2, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="h-1.5 w-1.5 rounded-full bg-[#8C5695]"
+            />
+            <motion.div 
+              animate={{ scale: [1, 1.2, 1] }}
+              transition={{ duration: 2, repeat: Infinity, delay: 0.2 }}
+              className="h-1.5 w-1.5 rounded-full bg-[#986AA1]"
+            />
+            <motion.div 
+              animate={{ scale: [1, 1.2, 1] }}
+              transition={{ duration: 2, repeat: Infinity, delay: 0.4 }}
+              className="h-1.5 w-1.5 rounded-full bg-[#8C5695]"
+            />
+          </div>
         </motion.div>
 
         {/* CTA Buttons */}
@@ -144,175 +185,99 @@ const HeroSection = () => {
   );
 };
 
-// OPTIMIZED Three.js Background Component
-const ThreeBackground = () => {
-  const canvasRef = useRef(null);
-  const rafRef = useRef(null);
+// Background Paths Component
+function FloatingPaths({ position }) {
+  const paths = useMemo(() => 
+    Array.from({ length: 36 }, (_, i) => ({
+      id: i,
+      d: `M-${380 - i * 5 * position} -${189 + i * 6}C-${
+        380 - i * 5 * position
+      } -${189 + i * 6} -${312 - i * 5 * position} ${216 - i * 6} ${
+        152 - i * 5 * position
+      } ${343 - i * 6}C${616 - i * 5 * position} ${470 - i * 6} ${
+        684 - i * 5 * position
+      } ${875 - i * 6} ${684 - i * 5 * position} ${875 - i * 6}`,
+      width: 0.5 + i * 0.03,
+    })), [position]
+  );
 
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
+  return (
+    <div className="absolute inset-0 pointer-events-none">
+      <svg
+        className="w-full h-full text-[#8C5695]"
+        viewBox="0 0 696 316"
+        fill="none"
+      >
+        <title>Background Paths</title>
+        {paths.map((path) => (
+          <motion.path
+            key={path.id}
+            d={path.d}
+            stroke="currentColor"
+            strokeWidth={path.width}
+            strokeOpacity={0.08 + path.id * 0.015}
+            initial={{ pathLength: 0.3, opacity: 0.6 }}
+            animate={{
+              pathLength: 1,
+              opacity: [0.3, 0.6, 0.3],
+              pathOffset: [0, 1, 0],
+            }}
+            transition={{
+              duration: 20 + Math.random() * 10,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+          />
+        ))}
+      </svg>
+    </div>
+  );
+}
 
-    let scene, camera, renderer, particles;
-    const mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
-    
-    // Performance check
-    const isMobile = window.innerWidth < 768;
-    const isLowPerf = !window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
-
-    const init = () => {
-      scene = new THREE.Scene();
-
-      camera = new THREE.PerspectiveCamera(
-        75,
-        window.innerWidth / window.innerHeight,
-        0.1,
-        1000
-      );
-      camera.position.z = 30;
-
-      renderer = new THREE.WebGLRenderer({
-        canvas: canvasRef.current,
-        alpha: true,
-        antialias: false, // Disable for performance
-        powerPreference: 'high-performance'
-      });
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5)); // Cap pixel ratio
-
-      // REDUCED particle count based on device
-      const particleCount = isMobile ? 300 : 600;
-      const positions = new Float32Array(particleCount * 3);
-      const colors = new Float32Array(particleCount * 3);
-
-      for (let i = 0; i < particleCount * 3; i += 3) {
-        positions[i] = (Math.random() - 0.5) * 100;
-        positions[i + 1] = (Math.random() - 0.5) * 100;
-        positions[i + 2] = (Math.random() - 0.5) * 100;
-
-        // Single color for simplicity
-        colors[i] = 140 / 255;
-        colors[i + 1] = 86 / 255;
-        colors[i + 2] = 149 / 255;
-      }
-
-      const geometry = new THREE.BufferGeometry();
-      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-      geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-      const material = new THREE.PointsMaterial({
-        size: isMobile ? 0.4 : 0.5,
-        vertexColors: true,
-        transparent: true,
-        opacity: 0.6,
-        blending: THREE.AdditiveBlending,
-      });
-
-      particles = new THREE.Points(geometry, material);
-      scene.add(particles);
-
-      // Only add ONE geometric shape to reduce complexity
-      if (!isMobile) {
-        const torusGeometry = new THREE.TorusGeometry(10, 1, 8, 50); // Reduced segments
-        const torusMaterial = new THREE.MeshBasicMaterial({
-          color: 0x8C5695,
-          wireframe: true,
-          transparent: true,
-          opacity: 0.1,
-        });
-        const torus = new THREE.Mesh(torusGeometry, torusMaterial);
-        torus.position.z = -20;
-        scene.add(torus);
-        window.torus = torus;
-      }
-
-      // Event listeners with throttling
-      let mouseMoveTimeout;
-      window.addEventListener('mousemove', (event) => {
-        clearTimeout(mouseMoveTimeout);
-        mouseMoveTimeout = setTimeout(() => {
-          mouse.targetX = (event.clientX / window.innerWidth) * 2 - 1;
-          mouse.targetY = -(event.clientY / window.innerHeight) * 2 + 1;
-        }, 16); // ~60fps throttle
-      });
-
-      let resizeTimeout;
-      window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-          camera.aspect = window.innerWidth / window.innerHeight;
-          camera.updateProjectionMatrix();
-          renderer.setSize(window.innerWidth, window.innerHeight);
-        }, 250);
-      });
-    };
-
-    const animate = () => {
-      rafRef.current = requestAnimationFrame(animate);
-
-      // Smooth mouse interpolation
-      mouse.x += (mouse.targetX - mouse.x) * 0.05;
-      mouse.y += (mouse.targetY - mouse.y) * 0.05;
-
-      // Rotate particles slowly
-      if (particles) {
-        particles.rotation.y += 0.0002;
-      }
-
-      // Rotate torus if it exists
-      if (window.torus) {
-        window.torus.rotation.x += 0.002;
-        window.torus.rotation.y += 0.001;
-      }
-
-      // Subtle camera movement
-      camera.position.x += (mouse.x * 1 - camera.position.x) * 0.01;
-      camera.position.y += (mouse.y * 1 - camera.position.y) * 0.01;
-      camera.lookAt(scene.position);
-
-      renderer.render(scene, camera);
-    };
-
-    // Load Three.js
-    const script = document.createElement('script');
-    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
-    script.async = true;
-    script.onload = () => {
-      if (!isLowPerf) {
-        init();
-        animate();
-      }
-    };
-    document.body.appendChild(script);
-
-    return () => {
-      if (rafRef.current) {
-        cancelAnimationFrame(rafRef.current);
-      }
-      if (renderer) {
-        renderer.dispose();
-      }
-      if (script.parentNode) {
-        script.parentNode.removeChild(script);
-      }
-      window.torus = null;
-    };
-  }, []);
-
-  return <canvas ref={canvasRef} className="absolute inset-0" />;
+const BackgroundPaths = () => {
+  return (
+    <div className="absolute inset-0">
+      <FloatingPaths position={1} />
+      <FloatingPaths position={-1} />
+    </div>
+  );
 };
 
-// Simplified Holographic Button
+// Enhanced Holographic Button
 const HolographicButton = ({ children, primary }) => {
   return (
     <motion.button
-      whileHover={{ scale: 1.05 }}
+      whileHover={{ scale: 1.05, y: -2 }}
       whileTap={{ scale: 0.95 }}
-      className="group relative overflow-hidden rounded-lg px-8 py-4 font-mono text-sm font-bold tracking-wider"
+      className="group relative overflow-hidden rounded-xl px-8 py-4 font-mono text-sm font-bold tracking-wider shadow-lg"
     >
-      <div className={`absolute inset-0 ${primary ? 'bg-gradient-to-r from-[#8C5695] to-[#986AA1]' : 'bg-white/5'}`} />
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-      <div className="absolute inset-0 rounded-lg border-2 border-[#8C5695]/50" />
-      <span className="relative z-10 text-white">{children}</span>
+      {primary ? (
+        <>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#8C5695] via-[#986AA1] to-[#8C5695] bg-[length:200%_100%]" />
+          <motion.div 
+            animate={{ x: ['-100%', '100%'] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+          />
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-[#986AA1] to-[#8C5695]" />
+        </>
+      ) : (
+        <>
+          <div className="absolute inset-0 bg-white border-2 border-[#8C5695]" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#8C5695]/0 via-[#8C5695]/10 to-[#8C5695]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        </>
+      )}
+      <span className={`relative z-10 flex items-center gap-2 ${primary ? 'text-white' : 'text-[#8C5695]'}`}>
+        {children}
+        <motion.span
+          animate={{ x: [0, 4, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+        >
+          →
+        </motion.span>
+      </span>
+      {/* Glow effect */}
+      <div className="absolute -inset-1 bg-gradient-to-r from-[#8C5695] to-[#986AA1] opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-300 -z-10" />
     </motion.button>
   );
 };
@@ -326,13 +291,13 @@ const TechStat = ({ value, label }) => {
       transition={{ duration: 0.5, type: 'spring' }}
       className="relative"
     >
-      <div className="font-mono text-3xl font-bold text-white md:text-4xl">
+      <div className="font-mono text-3xl font-bold text-[#8C5695] md:text-4xl">
         {value}
       </div>
-      <div className="mt-1 font-mono text-xs tracking-widest text-[#8C5695]">
+      <div className="mt-1 font-mono text-xs tracking-widest text-[#986AA1]">
         {label}
       </div>
-      <div className="mx-auto mt-3 h-1 w-20 overflow-hidden rounded-full bg-white/10">
+      <div className="mx-auto mt-3 h-1 w-20 overflow-hidden rounded-full bg-gray-200">
         <motion.div
           initial={{ x: '-100%' }}
           animate={{ x: '0%' }}
@@ -349,62 +314,12 @@ const SystemStatus = ({ label }) => {
   return (
     <div className="flex items-center gap-2">
       <div className="h-2 w-2 rounded-full bg-[#8C5695] animate-pulse" />
-      <span className="font-mono text-xs tracking-wider text-white/60">
+      <span className="font-mono text-xs tracking-wider text-gray-600">
         {label}
       </span>
       <span className="font-mono text-xs font-bold tracking-wider text-[#8C5695]">
         [ONLINE]
       </span>
-    </div>
-  );
-};
-
-// Static Hexagon Grid (CSS only)
-const HexagonGrid = () => {
-  return (
-    <div className="pointer-events-none absolute inset-0 opacity-5">
-      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <pattern id="hexagons" width="100" height="86.6" patternUnits="userSpaceOnUse" patternTransform="scale(2)">
-            <polygon points="50,0 93.3,25 93.3,75 50,100 6.7,75 6.7,25" fill="none" stroke="#8C5695" strokeWidth="1" />
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#hexagons)" />
-      </svg>
-    </div>
-  );
-};
-
-// Reduced Data Streams (from 8 to 4)
-const DataStreams = () => {
-  const streams = useMemo(() => 
-    Array.from({ length: 4 }, (_, i) => ({
-      id: i,
-      left: `${20 + i * 25}%`,
-      delay: i * 2,
-      duration: 15,
-    })), []
-  );
-
-  return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden">
-      {streams.map((stream) => (
-        <motion.div
-          key={stream.id}
-          className="absolute top-0 h-32 w-px bg-gradient-to-b from-transparent via-[#8C5695] to-transparent"
-          style={{ left: stream.left }}
-          animate={{
-            y: ['-100%', '100vh'],
-            opacity: [0, 0.6, 0.6, 0],
-          }}
-          transition={{
-            duration: stream.duration,
-            delay: stream.delay,
-            repeat: Infinity,
-            ease: 'linear',
-          }}
-        />
-      ))}
     </div>
   );
 };
@@ -486,16 +401,93 @@ const ScrollIndicator = () => {
         transition={{ duration: 2, repeat: Infinity }}
         className="flex flex-col items-center gap-2"
       >
-        <span className="font-mono text-xs tracking-wider text-white/40">SCROLL</span>
-        <div className="h-12 w-6 rounded-full border-2 border-[#8C5695]/40">
+        <span className="font-mono text-xs tracking-wider text-gray-500">SCROLL</span>
+        <div className="h-12 w-6 rounded-full border-2 border-[#8C5695]/40 bg-white/50 backdrop-blur-sm">
           <motion.div
             animate={{ y: [4, 16, 4] }}
             transition={{ duration: 2, repeat: Infinity }}
-            className="mx-auto mt-1 h-2 w-2 rounded-full bg-[#8C5695]"
+            className="mx-auto mt-1 h-2 w-2 rounded-full bg-[#8C5695] shadow-lg shadow-[#8C5695]/50"
           />
         </div>
       </motion.div>
     </motion.div>
+  );
+};
+
+// Floating Orbs
+const FloatingOrbs = () => {
+  const orbs = [
+    { size: 400, x: '10%', y: '20%', delay: 0, duration: 20 },
+    { size: 300, x: '80%', y: '60%', delay: 5, duration: 25 },
+    { size: 250, x: '60%', y: '80%', delay: 10, duration: 30 },
+  ];
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {orbs.map((orb, i) => (
+        <motion.div
+          key={i}
+          className="absolute rounded-full blur-3xl opacity-20"
+          style={{
+            width: orb.size,
+            height: orb.size,
+            left: orb.x,
+            top: orb.y,
+            background: `radial-gradient(circle, ${i % 2 === 0 ? '#8C5695' : '#986AA1'} 0%, transparent 70%)`,
+          }}
+          animate={{
+            x: [0, 100, 0],
+            y: [0, -100, 0],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: orb.duration,
+            delay: orb.delay,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
+// Animated Borders
+const AnimatedBorders = () => {
+  return (
+    <>
+      {/* Top border */}
+      <motion.div
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: 1 }}
+        transition={{ duration: 1.5, delay: 0.5 }}
+        className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#8C5695] to-transparent origin-center"
+      />
+      
+      {/* Bottom border */}
+      <motion.div
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: 1 }}
+        transition={{ duration: 1.5, delay: 0.7 }}
+        className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#986AA1] to-transparent origin-center"
+      />
+      
+      {/* Left border */}
+      <motion.div
+        initial={{ scaleY: 0 }}
+        animate={{ scaleY: 1 }}
+        transition={{ duration: 1.5, delay: 0.6 }}
+        className="absolute top-0 left-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[#8C5695] to-transparent origin-center"
+      />
+      
+      {/* Right border */}
+      <motion.div
+        initial={{ scaleY: 0 }}
+        animate={{ scaleY: 1 }}
+        transition={{ duration: 1.5, delay: 0.8 }}
+        className="absolute top-0 right-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[#986AA1] to-transparent origin-center"
+      />
+    </>
   );
 };
 
