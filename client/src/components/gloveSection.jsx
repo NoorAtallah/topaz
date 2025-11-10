@@ -305,7 +305,7 @@ const GlobalNetworkSection = () => {
   ]
 
   return (
-    <div className="container mx-auto px-6 py-24 xl:px-12">
+   <div className="container mx-auto px-6 py-24 xl:px-12 bg-white">
       <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
         {/* Left Side - Globe */}
         <motion.div

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Quote, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -8,7 +8,7 @@ const TestimonialsSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState(0);
 
-  const testimonials = [
+  const testimonials = useMemo(() => [
     {
       id: 1,
       quote: "The best VPS service I've ever used – fast and reliable.",
@@ -33,9 +33,9 @@ const TestimonialsSection = () => {
       rating: 5,
       avatar: "MZ"
     }
-  ];
+  ], []);
 
-  const paginate = (newDirection) => {
+  const paginate = useCallback((newDirection) => {
     setDirection(newDirection);
     setActiveIndex((prevIndex) => {
       if (newDirection === 1) {
@@ -43,7 +43,7 @@ const TestimonialsSection = () => {
       }
       return prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1;
     });
-  };
+  }, [testimonials.length]);
 
   // Auto-rotate testimonials
   useEffect(() => {
@@ -51,9 +51,9 @@ const TestimonialsSection = () => {
       paginate(1);
     }, 6000);
     return () => clearInterval(timer);
-  }, []);
+  }, [paginate]);
 
-  const variants = {
+  const variants = useMemo(() => ({
     enter: (direction) => ({
       x: direction > 0 ? 300 : -300,
       opacity: 0,
@@ -68,26 +68,19 @@ const TestimonialsSection = () => {
       x: direction < 0 ? 300 : -300,
       opacity: 0,
     }),
-  };
+  }), []);
+
+  const handleDotClick = useCallback((index) => {
+    setDirection(index > activeIndex ? 1 : -1);
+    setActiveIndex(index);
+  }, [activeIndex]);
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-white via-purple-50/20 to-white py-24 md:py-32">
-      {/* Background Effects */}
-      <div className="absolute inset-0">
-        {/* Static Gradient Orbs */}
+      {/* Background Effects - Simplified */}
+      <div className="absolute inset-0 pointer-events-none">
         <div className="absolute left-0 top-1/4 h-96 w-96 rounded-full bg-[#8C5695] opacity-5 blur-[120px]" />
         <div className="absolute right-0 bottom-1/4 h-96 w-96 rounded-full bg-[#986AA1] opacity-5 blur-[120px]" />
-      </div>
-
-      {/* Quote Pattern Overlay */}
-      <div className="pointer-events-none absolute inset-0 opacity-[0.02]">
-        <svg className="h-full w-full" xmlns="http://www.w3.org/2000/svg">
-          <pattern id="quotes" x="0" y="0" width="200" height="200" patternUnits="userSpaceOnUse">
-            <text x="50" y="100" fontSize="48" fill="#8C5695" opacity="0.3" fontFamily="serif">"</text>
-            <text x="150" y="50" fontSize="48" fill="#986AA1" opacity="0.3" fontFamily="serif">"</text>
-          </pattern>
-          <rect x="0" y="0" width="100%" height="100%" fill="url(#quotes)" />
-        </svg>
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -95,50 +88,32 @@ const TestimonialsSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
           className="mb-20 text-center"
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#8C5695]/20 bg-white px-6 py-2 shadow-sm"
-          >
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#8C5695]/20 bg-white px-6 py-2 shadow-sm">
             <Quote className="h-4 w-4 text-[#8C5695]" />
             <span className="font-mono text-sm font-medium tracking-wider text-[#8C5695]">
               TESTIMONIALS
             </span>
-          </motion.div>
+          </div>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-4 text-4xl font-black uppercase tracking-tight text-gray-900 sm:text-5xl md:text-6xl"
-          >
+          <h2 className="mb-4 text-4xl font-black uppercase tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
             Trusted by{' '}
             <span className="bg-gradient-to-r from-[#8C5695] to-[#986AA1] bg-clip-text text-transparent">
               Thousands
             </span>
-          </motion.h2>
+          </h2>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="mx-auto max-w-2xl text-lg text-gray-600"
-          >
+          <p className="mx-auto max-w-2xl text-lg text-gray-600">
             See what our customers say about their experience
-          </motion.p>
+          </p>
         </motion.div>
 
         {/* Main Testimonial Display */}
         <div className="relative mx-auto max-w-5xl">
-          {/* Giant Quote Marks */}
+          {/* Giant Quote Marks - Static, no animation */}
           <div className="pointer-events-none absolute -left-8 -top-8 text-[200px] font-serif leading-none text-[#8C5695] opacity-5 md:-left-16 md:-top-16 md:text-[300px]">
             "
           </div>
@@ -158,7 +133,7 @@ const TestimonialsSection = () => {
                 exit="exit"
                 transition={{
                   x: { type: 'spring', stiffness: 300, damping: 30 },
-                  opacity: { duration: 0.3 },
+                  opacity: { duration: 0.2 },
                 }}
                 className="absolute inset-0"
               >
@@ -171,13 +146,12 @@ const TestimonialsSection = () => {
           <div className="mt-12 flex items-center justify-center gap-8">
             {/* Previous Button */}
             <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => paginate(-1)}
               className="group relative"
             >
-              <div className="absolute inset-0 rounded-full bg-[#8C5695] opacity-10 blur-xl transition-opacity group-hover:opacity-20" />
-              <div className="relative flex h-12 w-12 items-center justify-center rounded-full border border-[#8C5695]/40 bg-white shadow-lg backdrop-blur-sm transition-colors hover:border-[#8C5695] hover:bg-[#8C5695]/5">
+              <div className="relative flex h-12 w-12 items-center justify-center rounded-full border border-[#8C5695]/40 bg-white shadow-lg transition-colors hover:border-[#8C5695] hover:bg-[#8C5695]/5">
                 <ChevronLeft className="h-6 w-6 text-[#8C5695]" />
               </div>
             </motion.button>
@@ -185,14 +159,10 @@ const TestimonialsSection = () => {
             {/* Dots Indicator */}
             <div className="flex gap-3">
               {testimonials.map((_, index) => (
-                <motion.button
+                <button
                   key={index}
-                  onClick={() => {
-                    setDirection(index > activeIndex ? 1 : -1);
-                    setActiveIndex(index);
-                  }}
-                  className="relative"
-                  whileHover={{ scale: 1.2 }}
+                  onClick={() => handleDotClick(index)}
+                  className="relative transition-transform hover:scale-110"
                 >
                   <div
                     className={`h-2 w-2 rounded-full transition-all duration-300 ${
@@ -201,19 +171,18 @@ const TestimonialsSection = () => {
                         : 'bg-gray-300'
                     }`}
                   />
-                </motion.button>
+                </button>
               ))}
             </div>
 
             {/* Next Button */}
             <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => paginate(1)}
               className="group relative"
             >
-              <div className="absolute inset-0 rounded-full bg-[#986AA1] opacity-10 blur-xl transition-opacity group-hover:opacity-20" />
-              <div className="relative flex h-12 w-12 items-center justify-center rounded-full border border-[#986AA1]/40 bg-white shadow-lg backdrop-blur-sm transition-colors hover:border-[#986AA1] hover:bg-[#986AA1]/5">
+              <div className="relative flex h-12 w-12 items-center justify-center rounded-full border border-[#986AA1]/40 bg-white shadow-lg transition-colors hover:border-[#986AA1] hover:bg-[#986AA1]/5">
                 <ChevronRight className="h-6 w-6 text-[#986AA1]" />
               </div>
             </motion.button>
@@ -224,8 +193,8 @@ const TestimonialsSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
           className="mt-24 grid grid-cols-3 gap-8 md:gap-16"
         >
           <StatItem value="5000+" label="Happy Clients" />
@@ -237,7 +206,7 @@ const TestimonialsSection = () => {
   );
 };
 
-const TestimonialCard = ({ testimonial }) => {
+const TestimonialCard = React.memo(({ testimonial }) => {
   return (
     <div className="relative h-full">
       {/* Card Background with Glow */}
@@ -250,45 +219,24 @@ const TestimonialCard = ({ testimonial }) => {
           <div className="absolute inset-0 bg-gradient-to-br from-[#8C5695] via-[#986AA1] to-transparent" />
         </div>
 
-        {/* Stars Rating */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mb-6 flex gap-1"
-        >
+        {/* Stars Rating - Removed individual animations */}
+        <div className="mb-6 flex gap-1">
           {[...Array(testimonial.rating)].map((_, i) => (
-            <motion.div
+            <Star
               key={i}
-              initial={{ opacity: 0, rotate: -180 }}
-              animate={{ opacity: 1, rotate: 0 }}
-              transition={{ duration: 0.3, delay: 0.3 + i * 0.1 }}
-            >
-              <Star
-                className="h-6 w-6 text-[#8C5695]"
-                fill="#8C5695"
-              />
-            </motion.div>
+              className="h-6 w-6 text-[#8C5695]"
+              fill="#8C5695"
+            />
           ))}
-        </motion.div>
+        </div>
 
         {/* Quote Text */}
-        <motion.blockquote
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="relative mb-8 text-2xl font-medium leading-relaxed text-gray-900 md:text-3xl md:leading-relaxed"
-        >
+        <blockquote className="relative mb-8 text-2xl font-medium leading-relaxed text-gray-900 md:text-3xl md:leading-relaxed">
           {testimonial.quote}
-        </motion.blockquote>
+        </blockquote>
 
         {/* Author Info */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="flex items-center gap-4"
-        >
+        <div className="flex items-center gap-4">
           {/* Avatar */}
           <div className="relative">
             <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#8C5695] to-[#986AA1] opacity-20 blur-md" />
@@ -313,19 +261,21 @@ const TestimonialCard = ({ testimonial }) => {
               </span>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </div>
   );
-};
+});
 
-const StatItem = ({ value, label }) => {
+TestimonialCard.displayName = 'TestimonialCard';
+
+const StatItem = React.memo(({ value, label }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
+      initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.4 }}
       className="text-center"
     >
       <div className="mb-2 bg-gradient-to-r from-[#8C5695] to-[#986AA1] bg-clip-text text-4xl font-black text-transparent md:text-5xl">
@@ -336,6 +286,8 @@ const StatItem = ({ value, label }) => {
       </div>
     </motion.div>
   );
-};
+});
+
+StatItem.displayName = 'StatItem';
 
 export default TestimonialsSection;
