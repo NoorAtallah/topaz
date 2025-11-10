@@ -27,7 +27,7 @@ const PricingSection = () => {
         'Free SSL Certificate'
       ],
       color: '#8C5695',
-      gradient: 'from-[#8C5695]/20 to-[#986AA1]/10'
+      gradient: 'from-[#8C5695]/10 to-[#986AA1]/5'
     },
     {
       id: 'pro',
@@ -49,7 +49,7 @@ const PricingSection = () => {
         'Daily Backups'
       ],
       color: '#986AA1',
-      gradient: 'from-[#986AA1]/20 to-[#A880B3]/10'
+      gradient: 'from-[#986AA1]/10 to-[#A880B3]/5'
     },
     {
       id: 'ultra',
@@ -72,37 +72,21 @@ const PricingSection = () => {
         'Performance Monitoring'
       ],
       color: '#A374AF',
-      gradient: 'from-[#A374AF]/20 to-[#B399C7]/10'
+      gradient: 'from-[#A374AF]/10 to-[#B399C7]/5'
     }
   ];
 
   return (
-    <section className="relative overflow-hidden bg-black py-24 md:py-32">
+    <section className="relative overflow-hidden bg-gradient-to-b from-white via-purple-50/20 to-white py-24 md:py-32">
       {/* Background Effects */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0a0514] to-black" />
-        
-        {/* Animated Orbs */}
-        <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{ duration: 8, repeat: Infinity }}
-          className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-[#8C5695] blur-[120px]"
-        />
-        <motion.div
-          animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{ duration: 10, repeat: Infinity, delay: 1 }}
-          className="absolute right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-[#986AA1] blur-[120px]"
-        />
+        {/* Static Orbs */}
+        <div className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-[#8C5695] opacity-5 blur-[120px]" />
+        <div className="absolute right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-[#986AA1] opacity-5 blur-[120px]" />
       </div>
 
       {/* Circuit Pattern */}
-      <div className="pointer-events-none absolute inset-0 opacity-10">
+      <div className="pointer-events-none absolute inset-0 opacity-[0.02]">
         <svg className="h-full w-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <pattern id="circuit" width="100" height="100" patternUnits="userSpaceOnUse">
@@ -131,10 +115,10 @@ const PricingSection = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#8C5695]/40 bg-[#8C5695]/5 px-6 py-2 backdrop-blur-sm"
+            className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#8C5695]/20 bg-white px-6 py-2 shadow-sm"
           >
             <Server className="h-4 w-4 text-[#8C5695]" />
-            <span className="font-mono text-sm font-medium tracking-wider text-white/90">
+            <span className="font-mono text-sm font-medium tracking-wider text-[#8C5695]">
               PRICING PLANS
             </span>
           </motion.div>
@@ -144,7 +128,7 @@ const PricingSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-4 text-4xl font-black uppercase tracking-tight text-white sm:text-5xl md:text-6xl"
+            className="mb-4 text-4xl font-black uppercase tracking-tight text-gray-900 sm:text-5xl md:text-6xl"
           >
             Our Most{' '}
             <span className="bg-gradient-to-r from-[#8C5695] to-[#986AA1] bg-clip-text text-transparent">
@@ -157,7 +141,7 @@ const PricingSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="mx-auto max-w-2xl text-lg text-white/60"
+            className="mx-auto max-w-2xl text-lg text-gray-600"
           >
             Choose the perfect VPS solution for your needs
           </motion.p>
@@ -185,7 +169,7 @@ const PricingSection = () => {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="mt-16 text-center"
         >
-          <p className="text-white/60">
+          <p className="text-gray-600">
             Need a custom solution?{' '}
             <button className="font-semibold text-[#8C5695] underline-offset-4 hover:underline">
               Contact our sales team
@@ -216,8 +200,8 @@ const PricingCard = ({ plan, index, isHovered, onHover, onLeave }) => {
           className="absolute -top-4 left-1/2 z-20 -translate-x-1/2"
         >
           <div className="relative">
-            <div className="absolute inset-0 animate-pulse rounded-full bg-[#8C5695] blur-md" />
-            <div className="relative flex items-center gap-2 rounded-full border border-[#8C5695] bg-black px-4 py-1.5">
+            <div className="absolute inset-0 rounded-full bg-[#8C5695] opacity-20 blur-md" />
+            <div className="relative flex items-center gap-2 rounded-full border border-[#8C5695] bg-white px-4 py-1.5 shadow-lg">
               <Zap className="h-3 w-3 text-[#8C5695]" fill="currentColor" />
               <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#8C5695]">
                 Most Popular
@@ -238,22 +222,14 @@ const PricingCard = ({ plan, index, isHovered, onHover, onLeave }) => {
       >
         {/* Outer Glow */}
         <div 
-          className="absolute -inset-1 rounded-2xl opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100"
+          className="absolute -inset-1 rounded-2xl opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-30"
           style={{ background: `linear-gradient(135deg, ${plan.color}, transparent)` }}
         />
 
         {/* Main Card */}
-        <div className="relative h-full overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-black/90 to-black/70 backdrop-blur-xl">
-          {/* Animated Border */}
-          <div className="absolute inset-0 rounded-2xl border border-transparent" style={{
-            background: `linear-gradient(135deg, ${plan.color}40, transparent) border-box`,
-            WebkitMask: 'linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)',
-            WebkitMaskComposite: 'xor',
-            maskComposite: 'exclude'
-          }} />
-
+        <div className="relative h-full overflow-hidden rounded-2xl border border-[#8C5695]/20 bg-white shadow-xl">
           {/* Corner Accent */}
-          <div className="absolute right-0 top-0 h-32 w-32 opacity-30">
+          <div className="absolute right-0 top-0 h-32 w-32 opacity-10">
             <div 
               className="absolute inset-0 rounded-bl-full"
               style={{ background: `radial-gradient(circle at top right, ${plan.color}, transparent)` }}
@@ -270,19 +246,19 @@ const PricingCard = ({ plan, index, isHovered, onHover, onLeave }) => {
               
               {/* Price Display */}
               <div className="mb-3 flex items-baseline gap-2">
-                <span className="text-5xl font-black text-white">${plan.price}</span>
-                <span className="text-lg text-white/40">/month</span>
+                <span className="text-5xl font-black text-gray-900">${plan.price}</span>
+                <span className="text-lg text-gray-500">/month</span>
               </div>
 
-              <p className="text-sm text-white/60">{plan.tagline}</p>
+              <p className="text-sm text-gray-600">{plan.tagline}</p>
             </div>
 
             {/* Tech Specs Panel */}
             <div className="mb-8">
-              <div className="rounded-xl border border-white/5 bg-white/5 p-4 backdrop-blur-sm">
+              <div className="rounded-xl border border-gray-100 bg-gray-50/50 p-4 backdrop-blur-sm">
                 <div className="mb-3 flex items-center gap-2">
                   <div className="h-1 w-1 rounded-full" style={{ backgroundColor: plan.color }} />
-                  <span className="font-mono text-xs font-semibold uppercase tracking-wider text-white/60">
+                  <span className="font-mono text-xs font-semibold uppercase tracking-wider text-gray-600">
                     Specifications
                   </span>
                 </div>
@@ -313,7 +289,7 @@ const PricingCard = ({ plan, index, isHovered, onHover, onLeave }) => {
                   >
                     <Check className="h-3 w-3" style={{ color: plan.color }} strokeWidth={3} />
                   </div>
-                  <span className="text-sm text-white/70">{feature}</span>
+                  <span className="text-sm text-gray-700">{feature}</span>
                 </motion.div>
               ))}
             </div>
@@ -322,7 +298,7 @@ const PricingCard = ({ plan, index, isHovered, onHover, onLeave }) => {
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="group/btn relative w-full overflow-hidden rounded-xl py-4 font-mono text-sm font-bold uppercase tracking-wider text-white"
+              className="group/btn relative w-full overflow-hidden rounded-xl py-4 font-mono text-sm font-bold uppercase tracking-wider text-white shadow-lg"
             >
               {/* Button Background */}
               <div 
@@ -346,38 +322,15 @@ const PricingCard = ({ plan, index, isHovered, onHover, onLeave }) => {
             </motion.button>
 
             {/* Fine Print */}
-            <p className="mt-4 text-center font-mono text-xs text-white/40">
+            <p className="mt-4 text-center font-mono text-xs text-gray-500">
               No setup fees • Cancel anytime
             </p>
           </div>
 
-          {/* Data Stream Effect */}
+          {/* Static Border Accent on Hover */}
           <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-            <motion.div
-              animate={{
-                y: ['-100%', '100%'],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: 'linear',
-              }}
-              className="absolute left-0 top-0 h-full w-px"
-              style={{ background: `linear-gradient(to bottom, transparent, ${plan.color}, transparent)` }}
-            />
-            <motion.div
-              animate={{
-                y: ['-100%', '100%'],
-              }}
-              transition={{
-                duration: 2.5,
-                repeat: Infinity,
-                ease: 'linear',
-                delay: 0.5,
-              }}
-              className="absolute right-0 top-0 h-full w-px"
-              style={{ background: `linear-gradient(to bottom, transparent, ${plan.color}, transparent)` }}
-            />
+            <div className="absolute left-0 top-0 h-full w-px" style={{ background: `linear-gradient(to bottom, transparent, ${plan.color}, transparent)` }} />
+            <div className="absolute right-0 top-0 h-full w-px" style={{ background: `linear-gradient(to bottom, transparent, ${plan.color}, transparent)` }} />
           </div>
         </div>
       </motion.div>
@@ -394,7 +347,7 @@ const SpecItem = ({ icon: Icon, label, color }) => {
       >
         <Icon className="h-3.5 w-3.5" style={{ color }} strokeWidth={2} />
       </div>
-      <span className="font-mono text-xs text-white/80">{label}</span>
+      <span className="font-mono text-xs text-gray-700">{label}</span>
     </div>
   );
 };

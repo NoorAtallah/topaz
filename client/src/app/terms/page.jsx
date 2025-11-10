@@ -59,15 +59,15 @@ const TermsPage = () => {
   ];
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-black">
+    <div className="relative min-h-screen overflow-hidden bg-white">
       {/* Background Effects */}
       <div className="fixed inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0a0514] to-black" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-[#faf8fb] to-white" />
         
         <motion.div
           animate={{
             scale: [1, 1.2, 1],
-            opacity: [0.08, 0.15, 0.08],
+            opacity: [0.05, 0.08, 0.05],
           }}
           transition={{ duration: 15, repeat: Infinity }}
           className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-[#8C5695] blur-[120px]"
@@ -75,7 +75,7 @@ const TermsPage = () => {
         <motion.div
           animate={{
             scale: [1, 1.3, 1],
-            opacity: [0.08, 0.15, 0.08],
+            opacity: [0.05, 0.08, 0.05],
           }}
           transition={{ duration: 18, repeat: Infinity }}
           className="absolute right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-[#986AA1] blur-[120px]"
@@ -118,8 +118,8 @@ const TermsPage = () => {
             onClick={scrollToTop}
             className="fixed bottom-8 right-8 z-50 group"
           >
-            <div className="absolute inset-0 rounded-full bg-[#8C5695] opacity-50 blur-xl transition-opacity group-hover:opacity-100" />
-            <div className="relative flex h-12 w-12 items-center justify-center rounded-full border-2 border-[#8C5695] bg-black backdrop-blur-sm transition-colors hover:bg-[#8C5695]/20">
+            <div className="absolute inset-0 rounded-full bg-[#8C5695] opacity-30 blur-xl transition-opacity group-hover:opacity-50" />
+            <div className="relative flex h-12 w-12 items-center justify-center rounded-full border-2 border-[#8C5695] bg-white shadow-lg backdrop-blur-sm transition-colors hover:bg-[#8C5695]/5">
               <ArrowUp className="h-5 w-5 text-[#8C5695]" />
             </div>
           </motion.button>
@@ -145,10 +145,10 @@ const HeroSection = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#8C5695]/40 bg-[#8C5695]/5 px-6 py-2 backdrop-blur-sm"
+            className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#8C5695]/20 bg-[#8C5695]/5 px-6 py-2 backdrop-blur-sm"
           >
             <FileText className="h-4 w-4 text-[#8C5695]" />
-            <span className="font-mono text-sm font-medium tracking-wider text-white/90">
+            <span className="font-mono text-sm font-medium tracking-wider text-gray-700">
               LEGAL AGREEMENT
             </span>
           </motion.div>
@@ -158,7 +158,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="mb-6 text-5xl font-black uppercase tracking-tight text-white sm:text-6xl md:text-7xl"
+            className="mb-6 text-5xl font-black uppercase tracking-tight text-gray-900 sm:text-6xl md:text-7xl"
           >
             Terms &{' '}
             <span className="bg-gradient-to-r from-[#8C5695] to-[#986AA1] bg-clip-text text-transparent">
@@ -171,7 +171,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="mx-auto mb-6 max-w-3xl text-lg text-white/70"
+            className="mx-auto mb-6 max-w-3xl text-lg text-gray-600"
           >
             These Terms and Conditions govern your access to and use of our website and services, 
             including VPS hosting, domains, and software licenses. By using our services, you agree 
@@ -183,9 +183,9 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="inline-flex items-center gap-2 rounded-lg border border-[#8C5695]/30 bg-[#8C5695]/10 px-4 py-2"
+            className="inline-flex items-center gap-2 rounded-lg border border-[#8C5695]/20 bg-[#8C5695]/5 px-4 py-2"
           >
-            <span className="font-mono text-sm text-white/60">Effective Date:</span>
+            <span className="font-mono text-sm text-gray-600">Effective Date:</span>
             <span className="font-mono text-sm font-bold text-[#8C5695]">{effectiveDate}</span>
           </motion.div>
         </motion.div>
@@ -212,7 +212,7 @@ const SidebarNav = ({ sections, activeSection }) => {
       transition={{ duration: 0.6 }}
       className="sticky top-24"
     >
-      <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-black/90 to-black/70 p-6 backdrop-blur-xl">
+      <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm backdrop-blur-xl">
         <h3 className="mb-4 font-mono text-sm font-bold uppercase tracking-wider text-[#8C5695]">
           Quick Navigation
         </h3>
@@ -228,8 +228,8 @@ const SidebarNav = ({ sections, activeSection }) => {
                 onClick={() => scrollToSection(section.id)}
                 className={`group flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left transition-all ${
                   isActive
-                    ? 'bg-[#8C5695]/20 text-white'
-                    : 'text-white/60 hover:bg-white/5 hover:text-white'
+                    ? 'bg-[#8C5695]/10 text-gray-900'
+                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                 }`}
               >
                 <Icon className={`h-4 w-4 flex-shrink-0 ${isActive ? 'text-[#8C5695]' : ''}`} />
@@ -305,29 +305,29 @@ const TermsContent = () => {
           </li>
         </ul>
 
-        <div className="rounded-lg border border-red-500/20 bg-red-500/5 p-4">
+        <div className="rounded-lg border border-red-200 bg-red-50 p-4">
           <div className="mb-2 flex items-center gap-2">
-            <AlertTriangle className="h-5 w-5 text-red-400" />
-            <span className="font-semibold text-red-400">Prohibited Activities</span>
+            <AlertTriangle className="h-5 w-5 text-red-600" />
+            <span className="font-semibold text-red-700">Prohibited Activities</span>
           </div>
-          <p className="mb-3 text-sm text-white/70">
+          <p className="mb-3 text-sm text-gray-700">
             You may not use our services for any illegal, harmful, or abusive activity, including but not limited to:
           </p>
           <ul className="space-y-2 text-sm">
-            <li className="flex items-start gap-2 text-white/70">
-              <XCircle className="h-4 w-4 flex-shrink-0 text-red-400 mt-0.5" />
+            <li className="flex items-start gap-2 text-gray-700">
+              <XCircle className="h-4 w-4 flex-shrink-0 text-red-600 mt-0.5" />
               <span>Hosting malware, phishing, or scams</span>
             </li>
-            <li className="flex items-start gap-2 text-white/70">
-              <XCircle className="h-4 w-4 flex-shrink-0 text-red-400 mt-0.5" />
+            <li className="flex items-start gap-2 text-gray-700">
+              <XCircle className="h-4 w-4 flex-shrink-0 text-red-600 mt-0.5" />
               <span>Sending spam or unsolicited emails</span>
             </li>
-            <li className="flex items-start gap-2 text-white/70">
-              <XCircle className="h-4 w-4 flex-shrink-0 text-red-400 mt-0.5" />
+            <li className="flex items-start gap-2 text-gray-700">
+              <XCircle className="h-4 w-4 flex-shrink-0 text-red-600 mt-0.5" />
               <span>Infringing copyrights or trademarks</span>
             </li>
-            <li className="flex items-start gap-2 text-white/70">
-              <XCircle className="h-4 w-4 flex-shrink-0 text-red-400 mt-0.5" />
+            <li className="flex items-start gap-2 text-gray-700">
+              <XCircle className="h-4 w-4 flex-shrink-0 text-red-600 mt-0.5" />
               <span>Launching DDoS attacks or abusing network resources</span>
             </li>
           </ul>
@@ -394,19 +394,19 @@ const TermsContent = () => {
         <p className="mb-4">We reserve the right to suspend or terminate services without notice if you:</p>
         <ul className="mb-4 space-y-3">
           <li className="flex items-start gap-2">
-            <AlertTriangle className="h-5 w-5 flex-shrink-0 text-yellow-500 mt-0.5" />
+            <AlertTriangle className="h-5 w-5 flex-shrink-0 text-yellow-600 mt-0.5" />
             <span>Violate these Terms or acceptable use policies</span>
           </li>
           <li className="flex items-start gap-2">
-            <AlertTriangle className="h-5 w-5 flex-shrink-0 text-yellow-500 mt-0.5" />
+            <AlertTriangle className="h-5 w-5 flex-shrink-0 text-yellow-600 mt-0.5" />
             <span>Engage in illegal or abusive behavior</span>
           </li>
           <li className="flex items-start gap-2">
-            <AlertTriangle className="h-5 w-5 flex-shrink-0 text-yellow-500 mt-0.5" />
+            <AlertTriangle className="h-5 w-5 flex-shrink-0 text-yellow-600 mt-0.5" />
             <span>Fail to pay invoices within the grace period</span>
           </li>
         </ul>
-        <p className="text-white/70">
+        <p className="text-gray-600">
           Serious violations may result in immediate termination and permanent banning.
         </p>
       </TermsSection>
@@ -511,12 +511,12 @@ const TermsSection = ({ id, number, title, icon: Icon, children }) => {
     >
       <div className="absolute -inset-2 rounded-3xl bg-gradient-to-r from-[#8C5695]/10 to-[#986AA1]/5 opacity-0 blur-xl transition-opacity group-hover:opacity-100" />
       
-      <div className="relative rounded-3xl border border-white/10 bg-gradient-to-br from-black/90 to-black/70 p-8 backdrop-blur-xl">
+      <div className="relative rounded-3xl border border-gray-200 bg-white p-8 shadow-sm backdrop-blur-xl">
         {/* Section Header */}
         <div className="mb-6 flex items-start gap-4">
           <div className="relative flex-shrink-0">
-            <div className="absolute inset-0 rounded-xl bg-[#8C5695] opacity-30 blur-lg" />
-            <div className="relative flex h-12 w-12 items-center justify-center rounded-xl border border-[#8C5695]/40 bg-gradient-to-br from-[#8C5695]/20 to-[#986AA1]/10">
+            <div className="absolute inset-0 rounded-xl bg-[#8C5695] opacity-20 blur-lg" />
+            <div className="relative flex h-12 w-12 items-center justify-center rounded-xl border border-[#8C5695]/20 bg-gradient-to-br from-[#8C5695]/10 to-[#986AA1]/5">
               <Icon className="h-6 w-6 text-[#8C5695]" />
             </div>
           </div>
@@ -525,13 +525,13 @@ const TermsSection = ({ id, number, title, icon: Icon, children }) => {
             <div className="mb-1 font-mono text-sm font-semibold text-[#8C5695]">
               Section {number}
             </div>
-            <h2 className="text-2xl font-bold text-white">{title}</h2>
+            <h2 className="text-2xl font-bold text-gray-900">{title}</h2>
           </div>
         </div>
 
         {/* Section Content */}
-        <div className="prose prose-invert max-w-none">
-          <div className="space-y-4 text-white/80 leading-relaxed">
+        <div className="prose prose-gray max-w-none">
+          <div className="space-y-4 text-gray-700 leading-relaxed">
             {children}
           </div>
         </div>
@@ -549,13 +549,13 @@ const ContactSection = () => {
       transition={{ duration: 0.6 }}
       className="relative"
     >
-      <div className="absolute -inset-2 rounded-3xl bg-gradient-to-r from-[#8C5695]/20 to-[#986AA1]/10 blur-2xl" />
+      <div className="absolute -inset-2 rounded-3xl bg-gradient-to-r from-[#8C5695]/10 to-[#986AA1]/5 blur-2xl" />
       
-      <div className="relative rounded-3xl border border-[#8C5695]/30 bg-gradient-to-br from-[#8C5695]/10 to-[#986AA1]/5 p-8 text-center backdrop-blur-xl">
-        <h3 className="mb-4 text-2xl font-bold text-white">
+      <div className="relative rounded-3xl border border-[#8C5695]/20 bg-gradient-to-br from-[#8C5695]/5 to-[#986AA1]/5 p-8 text-center shadow-lg backdrop-blur-xl">
+        <h3 className="mb-4 text-2xl font-bold text-gray-900">
           Questions About These Terms?
         </h3>
-        <p className="mb-6 text-white/70">
+        <p className="mb-6 text-gray-600">
           If you have any questions or concerns about these Terms and Conditions, please contact us.
         </p>
         <motion.a

@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react';
 import {
   Server,
   Cpu,
@@ -15,526 +14,346 @@ import {
   Headphones,
   CreditCard,
   Database,
-  Lock,
   Zap,
-  Globe,
-  Terminal,
-  Package,
   CheckCircle,
-  ChevronRight,
-  Layers,
-  Activity
+  ArrowRight,
+  Sparkles
 } from 'lucide-react';
-
+import Link from 'next/link';
 const ServicesPage = () => {
-  const [activeService, setActiveService] = useState(null);
-
   const services = [
     {
       id: 'vps-hosting',
       icon: Server,
       title: 'VPS Hosting Plans',
-      description: 'We offer VPS plans for every need: Standard for small businesses, Quasar for growing apps, and Turbo for high performance. Choose Managed for expert support or Unmanaged for full control.',
+      tagline: 'Power for Every Scale',
+      description: 'From startups to enterprises, our Standard, Quasar, and Turbo plans deliver exactly what you need. Choose Managed for hands-off operation or Unmanaged for complete control.',
+      image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80',
       color: '#8C5695',
-      features: [
-        'Standard VPS for small businesses',
-        'Quasar for growing applications',
-        'Turbo for high performance',
-        'Managed or Unmanaged options'
-      ]
+      features: ['Standard VPS', 'Quasar Plans', 'Turbo Performance', 'Managed Support'],
+      align: 'left'
     },
     {
       id: 'server-resources',
       icon: Cpu,
       title: 'Server Resources',
-      description: 'Custom VPS Features: Choose RAM from 1 GB to 64 GB to fit your needs. Enjoy fast performance with SSD storage, or boost speed even more with an NVMe upgrade for ultra-fast read/write access.',
+      tagline: 'Built for Performance',
+      description: 'Scale from 1 GB to 64 GB RAM seamlessly. Lightning-fast SSD storage comes standard, with optional NVMe upgrades for those who demand the absolute fastest speeds.',
+      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80',
       color: '#986AA1',
-      features: [
-        'RAM: 1 GB to 64 GB',
-        'Fast SSD storage',
-        'NVMe upgrade available',
-        'Ultra-fast read/write access'
-      ]
+      features: ['1-64 GB RAM', 'SSD Storage', 'NVMe Available', 'Unlimited Bandwidth'],
+      align: 'right'
     },
     {
-      id: 'ip-network',
-      icon: Network,
-      title: 'IP & Network',
-      description: 'Network & Security Features: Get a dedicated IP for better SSL, email, and SEO. Use private networking to connect VPS instances internally. Enjoy IPv6 support for future-ready addressing and stay safe with built-in DDoS protection.',
+      id: 'network-security',
+      icon: Shield,
+      title: 'Network & Security',
+      tagline: 'Protected & Connected',
+      description: 'Dedicated IPs, private networking, IPv6 support, and enterprise-grade DDoS protection. Your data stays safe while staying accessible.',
+      image: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=1200&q=80',
       color: '#A374AF',
-      features: [
-        'Dedicated IP addresses',
-        'Private networking',
-        'IPv6 support',
-        'Built-in DDoS protection'
-      ]
+      features: ['Dedicated IPs', 'Private Network', 'IPv6 Ready', 'DDoS Protected'],
+      align: 'left'
     },
     {
       id: 'control-panels',
       icon: Settings,
-      title: 'Software & Control Panels',
-      description: 'Control Panels & Tools: Manage your server easily with cPanel/WHM for Linux or Plesk for both Windows and Linux. Advanced users can opt for the lightweight Interworx Panel. Plus, install over 400 apps instantly with Softaculous Auto Installer.',
+      title: 'Control Panels',
+      tagline: 'Manage with Ease',
+      description: 'Industry-leading control panels including cPanel/WHM, Plesk, and Interworx. Plus Softaculous with 400+ applications ready to install instantly.',
+      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80',
       color: '#8C5695',
-      features: [
-        'cPanel/WHM for Linux',
-        'Plesk (Windows & Linux)',
-        'Interworx Panel',
-        'Softaculous - 400+ apps'
-      ]
+      features: ['cPanel/WHM', 'Plesk Panel', 'Interworx', '400+ Apps'],
+      align: 'right'
     },
     {
-      id: 'operating-systems',
-      icon: Monitor,
-      title: 'Operating Systems',
-      description: 'Choose from a variety of OS options to fit your needs: CentOS 7/8, Ubuntu 20.04/22.04, Debian, AlmaLinux, and Windows Server (license optional).',
-      color: '#986AA1',
-      features: [
-        'CentOS 7 / 8',
-        'Ubuntu 20.04 / 22.04',
-        'Debian & AlmaLinux',
-        'Windows Server available'
-      ]
-    },
-    {
-      id: 'security',
-      icon: Shield,
-      title: 'Security Features',
-      description: 'Protect your server with free SSL certificates, advanced firewall configuration, and malware scanning tools like CXS or ImunifyAV. Stay safe with regular security patches to keep your system up to date.',
-      color: '#A374AF',
-      features: [
-        'Free SSL certificates',
-        'Advanced firewall config',
-        'Malware scanning (CXS/ImunifyAV)',
-        'Regular security patches'
-      ]
-    },
-    {
-      id: 'backups',
-      icon: Database,
-      title: 'Backups & Storage',
-      description: 'Backup Solutions: Keep your data safe with automated daily backups and on-demand snapshots before any changes. Need more room? Add extra backup storage for peace of mind.',
-      color: '#8C5695',
-      features: [
-        'Automated daily backups',
-        'On-demand snapshots',
-        'Extra backup storage',
-        'Data protection guarantee'
-      ]
-    },
-    {
-      id: 'cloud',
+      id: 'cloud-infrastructure',
       icon: Cloud,
-      title: 'Cloud Features',
-      description: 'Cloud & Scalability Features: Scale easily with Cloud VPS infrastructure that grows with your needs. Ensure performance and uptime with load balancing and high availability setups for critical services.',
+      title: 'Cloud Infrastructure',
+      tagline: 'Scale Without Limits',
+      description: 'Built on enterprise cloud architecture with automatic scaling, intelligent load balancing, and high availability for mission-critical applications.',
+      image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80',
       color: '#986AA1',
-      features: [
-        'Scalable Cloud VPS',
-        'Load balancing',
-        'High availability',
-        'Auto-scaling options'
-      ]
+      features: ['Cloud VPS', 'Auto-Scaling', 'Load Balancing', 'High Availability'],
+      align: 'left'
     },
     {
-      id: 'developer',
+      id: 'developer-tools',
       icon: Code,
       title: 'Developer Tools',
-      description: 'Developer Access & Control: Gain full root access for total server control, use SSH access for secure management, and leverage API access to automate tasks and integrate with your systems.',
+      tagline: 'Built for Developers',
+      description: 'Full root access, secure SSH, powerful APIs, and automation tools. Everything developers need to build, deploy, and scale applications.',
+      image: 'https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=1200&q=80',
       color: '#A374AF',
-      features: [
-        'Full root access',
-        'Secure SSH access',
-        'API integration',
-        'Automation tools'
-      ]
+      features: ['Root Access', 'SSH Access', 'API Ready', 'Git Integration'],
+      align: 'right'
     },
     {
       id: 'support',
       icon: Headphones,
-      title: 'Support & Management',
-      description: 'Support & Management Services: Get 24/7 technical support from our expert team. Choose a fully managed VPS so you can focus on your business while we handle the rest. Enjoy free migration services and real-time server monitoring.',
+      title: '24/7 Expert Support',
+      tagline: 'Always Here for You',
+      description: 'Round-the-clock support from certified experts. Fully managed options, free migrations, and real-time monitoring keep you running smoothly.',
+      image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1200&q=80',
       color: '#8C5695',
-      features: [
-        '24/7 technical support',
-        'Fully managed VPS',
-        'Free migration services',
-        'Real-time monitoring'
-      ]
-    },
-    {
-      id: 'billing',
-      icon: CreditCard,
-      title: 'Billing & Licensing',
-      description: 'Billing & Hosting Add-ons: Streamline operations with WHMCS integration for automated billing and support. Get discounted license add-ons for cPanel, Plesk, or Softaculous. Bundle your hosting and domains for a complete solution.',
-      color: '#986AA1',
-      features: [
-        'WHMCS integration',
-        'Discounted licenses',
-        'Domain bundling',
-        'Flexible payment options'
-      ]
+      features: ['24/7 Support', 'Expert Team', 'Free Migration', 'Real-Time Monitoring'],
+      align: 'left'
     }
   ];
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-black">
-      {/* Background Effects */}
-      <div className="fixed inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0a0514] to-black" />
-        
-        {/* Animated Orbs */}
-        <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.15, 0.25, 0.15],
-            x: [0, 100, 0],
-          }}
-          transition={{ duration: 15, repeat: Infinity }}
-          className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-[#8C5695] blur-[120px]"
-        />
-        <motion.div
-          animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.15, 0.25, 0.15],
-            x: [0, -100, 0],
-          }}
-          transition={{ duration: 18, repeat: Infinity }}
-          className="absolute right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-[#986AA1] blur-[120px]"
-        />
-      </div>
+    <div className="relative min-h-screen overflow-hidden bg-white">
+      {/* Hero */}
+      <HeroSection />
 
-      {/* Grid Pattern */}
-      <div className="pointer-events-none fixed inset-0 opacity-[0.03]">
-        <div className="h-full w-full bg-[linear-gradient(rgba(140,86,149,0.5)_1px,transparent_1px),linear-gradient(90deg,rgba(140,86,149,0.5)_1px,transparent_1px)] bg-[size:50px_50px]" />
-      </div>
+      {/* Full-Width Diagonal Sections */}
+      {services.map((service, index) => (
+        <DiagonalServiceSection key={service.id} service={service} index={index} />
+      ))}
 
-      {/* Content */}
-      <div className="relative">
-        {/* Hero Section */}
-        <HeroSection />
+      {/* Featured Stats */}
+      <StatsSection />
 
-        {/* Services Grid */}
-        <section className="relative px-4 py-24 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-7xl">
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {services.map((service, index) => (
-                <ServiceCard
-                  key={service.id}
-                  service={service}
-                  index={index}
-                  isActive={activeService === service.id}
-                  onClick={() => setActiveService(activeService === service.id ? null : service.id)}
-                />
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Bottom CTA */}
-        <BottomCTA />
-      </div>
+      {/* CTA */}
+      <BottomCTA />
     </div>
   );
 };
 
 const HeroSection = () => {
   return (
-    <section className="relative px-4 py-32 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-5xl text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#8C5695]/40 bg-[#8C5695]/5 px-6 py-2 backdrop-blur-sm"
-          >
-            <Layers className="h-4 w-4 text-[#8C5695]" />
-            <span className="font-mono text-sm font-medium tracking-wider text-white/90">
-              OUR SERVICES
-            </span>
-          </motion.div>
-
-          {/* Main Heading */}
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="mb-6 text-5xl font-black uppercase tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl"
-          >
-            <span className="bg-gradient-to-r from-[#8C5695] to-[#986AA1] bg-clip-text text-transparent">
-              Services
-            </span>
-          </motion.h1>
-
-          {/* Description */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="mx-auto mb-8 max-w-3xl text-xl leading-relaxed text-white/70"
-          >
-            Welcome to your one-stop solution for powerful VPS hosting and professional server services. 
-            Whether you're a developer, business owner, or reseller, we have exactly what you need — fast, secure, and scalable.
-          </motion.p>
-
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="flex flex-wrap items-center justify-center gap-8"
-          >
-            <StatBadge icon={Zap} label="99.9% Uptime" />
-            <StatBadge icon={Shield} label="DDoS Protected" />
-            <StatBadge icon={Activity} label="24/7 Support" />
-          </motion.div>
-        </motion.div>
+    <section className="relative overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800 px-4 py-32 sm:px-6 lg:px-8">
+      {/* Background Orbs */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-[#8C5695] opacity-20 blur-[120px]" />
+        <div className="absolute right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-[#986AA1] opacity-20 blur-[120px]" />
       </div>
 
-      {/* Decorative Elements */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.8, duration: 1 }}
-        className="absolute bottom-0 left-1/2 h-px w-64 -translate-x-1/2 bg-gradient-to-r from-transparent via-[#8C5695] to-transparent"
+      <div className="relative mx-auto max-w-7xl text-center">
+        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#8C5695]/40 bg-[#8C5695]/10 px-6 py-2 backdrop-blur-sm">
+          <Sparkles className="h-4 w-4 text-[#8C5695]" />
+          <span className="font-mono text-sm font-medium tracking-wider text-white">
+            OUR SERVICES
+          </span>
+        </div>
+
+        <h1 className="mb-6 text-5xl font-black uppercase tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl">
+          Professional{' '}
+          <span className="bg-gradient-to-r from-[#8C5695] to-[#986AA1] bg-clip-text text-transparent">
+            Hosting
+          </span>
+        </h1>
+
+        <p className="mx-auto mb-12 max-w-3xl text-xl leading-relaxed text-white/80">
+          Everything you need to power your digital presence
+        </p>
+
+        <a
+          href="#services"
+          className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 font-bold text-gray-900 transition-all hover:scale-105"
+        >
+          Explore Services
+          <ArrowRight className="h-5 w-5" />
+        </a>
+      </div>
+
+      {/* Diagonal Bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-white" style={{ clipPath: 'polygon(0 100%, 100% 0, 100% 100%)' }} />
+    </section>
+  );
+};
+
+const DiagonalServiceSection = ({ service, index }) => {
+  const Icon = service.icon;
+  const isLeft = service.align === 'left';
+
+  return (
+    <section
+      id="services"
+      className="relative overflow-hidden"
+      style={{
+        background: index % 2 === 0 ? 'white' : '#fafafa'
+      }}
+    >
+      {/* Diagonal Top */}
+      <div
+        className="absolute left-0 right-0 top-0 h-24"
+        style={{
+          background: index % 2 === 0 ? '#fafafa' : 'white',
+          clipPath: 'polygon(0 0, 100% 100%, 100% 0)'
+        }}
+      />
+
+      {/* Content */}
+      <div className="relative px-4 py-24 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className={`grid gap-12 lg:grid-cols-2 lg:gap-16 items-center ${isLeft ? '' : 'lg:grid-flow-dense'}`}>
+            {/* Image Side */}
+            <div className={isLeft ? '' : 'lg:col-start-2'}>
+              <div className="group relative">
+                {/* Number Watermark */}
+                <div
+                  className="absolute -top-8 left-0 text-[120px] font-black leading-none opacity-5"
+                  style={{ color: service.color }}
+                >
+                  {String(index + 1).padStart(2, '0')}
+                </div>
+
+                {/* Image */}
+                <div className="relative overflow-hidden rounded-3xl shadow-2xl">
+                  <div
+                    className="aspect-[4/3] w-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                    style={{ backgroundImage: `url(${service.image})` }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent" />
+
+                  {/* Floating Icon Badge */}
+                  <div className="absolute bottom-6 left-6">
+                    <div
+                      className="flex h-16 w-16 items-center justify-center rounded-2xl border-2 bg-white shadow-xl"
+                      style={{ borderColor: service.color }}
+                    >
+                      <Icon className="h-8 w-8" style={{ color: service.color }} strokeWidth={2} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Content Side */}
+            <div className={isLeft ? '' : 'lg:col-start-1 lg:row-start-1'}>
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border px-4 py-2" style={{ borderColor: `${service.color}40`, background: `${service.color}10` }}>
+                <div className="h-2 w-2 rounded-full" style={{ background: service.color }} />
+                <span className="font-mono text-xs font-bold uppercase tracking-wider" style={{ color: service.color }}>
+                  {service.tagline}
+                </span>
+              </div>
+
+              <h2 className="mb-6 text-4xl font-black text-gray-900 md:text-5xl lg:text-6xl">
+                {service.title}
+              </h2>
+
+              <p className="mb-8 text-xl leading-relaxed text-gray-600">
+                {service.description}
+              </p>
+
+              {/* Features Grid */}
+              <div className="mb-8 grid grid-cols-2 gap-4">
+                {service.features.map((feature, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <div
+                      className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg"
+                      style={{ background: `${service.color}15` }}
+                    >
+                      <CheckCircle className="h-5 w-5" style={{ color: service.color }} />
+                    </div>
+                    <span className="font-semibold text-gray-700">{feature}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* CTA Button */}
+              {/* <button
+                className="group inline-flex items-center gap-2 rounded-xl px-8 py-4 font-bold text-white transition-all hover:scale-105 hover:shadow-xl"
+                style={{ background: service.color }}
+              >
+                Learn More
+                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+              </button> */}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Diagonal Bottom */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-24"
+        style={{
+          background: index % 2 === 0 ? '#fafafa' : 'white',
+          clipPath: 'polygon(0 100%, 100% 0, 100% 100%)'
+        }}
       />
     </section>
   );
 };
 
-const StatBadge = ({ icon: Icon, label }) => {
-  return (
-    <div className="flex items-center gap-2 rounded-full border border-[#8C5695]/30 bg-[#8C5695]/5 px-4 py-2 backdrop-blur-sm">
-      <Icon className="h-4 w-4 text-[#8C5695]" />
-      <span className="font-mono text-sm font-semibold text-white/80">
-        {label}
-      </span>
-    </div>
-  );
-};
-
-const ServiceCard = ({ service, index, isActive, onClick }) => {
-  const Icon = service.icon;
+const StatsSection = () => {
+  const stats = [
+    { icon: Server, value: '10,000+', label: 'Active Servers' },
+    { icon: Shield, value: '99.99%', label: 'Uptime SLA' },
+    { icon: Zap, value: '< 100ms', label: 'Response Time' },
+    { icon: Headphones, value: '24/7', label: 'Expert Support' }
+  ];
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: index * 0.05 }}
-      className="group relative"
-    >
-      <motion.div
-        whileHover={{ y: -8 }}
-        transition={{ duration: 0.3 }}
-        className="relative h-full"
-      >
-        {/* Glow Effect */}
-        <div
-          className="absolute -inset-1 rounded-2xl opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100"
-          style={{ background: `linear-gradient(135deg, ${service.color}, transparent)` }}
-        />
+    <section className="relative overflow-hidden bg-gradient-to-br from-[#8C5695] to-[#986AA1] px-4 py-24 sm:px-6 lg:px-8">
+      {/* Diagonal Top */}
+      <div className="absolute left-0 right-0 top-0 h-24 bg-white" style={{ clipPath: 'polygon(0 0, 100% 100%, 100% 0)' }} />
 
-        {/* Card */}
-        <div className="relative h-full overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-black/90 to-black/70 backdrop-blur-xl">
-          {/* Animated Border */}
-          <motion.div
-            className="absolute inset-0 rounded-2xl"
-            style={{
-              background: `linear-gradient(135deg, ${service.color}40, transparent)`,
-            }}
-            animate={{
-              opacity: isActive ? 1 : 0.3,
-            }}
-          />
-
-          {/* Corner Accent */}
-          <div className="absolute right-0 top-0 h-32 w-32 opacity-20">
-            <div
-              className="absolute inset-0 rounded-bl-full"
-              style={{ background: `radial-gradient(circle at top right, ${service.color}, transparent)` }}
-            />
-          </div>
-
-          {/* Content */}
-          <div className="relative p-8">
-            {/* Icon */}
-            <motion.div
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              transition={{ type: 'spring', stiffness: 300 }}
-              className="mb-6 inline-flex"
-            >
-              <div className="relative">
-                <div
-                  className="absolute inset-0 rounded-xl opacity-40 blur-xl"
-                  style={{ backgroundColor: service.color }}
-                />
-                <div
-                  className="relative flex h-16 w-16 items-center justify-center rounded-xl border"
-                  style={{
-                    borderColor: `${service.color}40`,
-                    background: `linear-gradient(135deg, ${service.color}20, ${service.color}10)`,
-                  }}
-                >
-                  <Icon className="h-8 w-8" style={{ color: service.color }} strokeWidth={2} />
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Title */}
-            <h3 className="mb-3 text-2xl font-bold text-white">
-              {service.title}
-            </h3>
-
-            {/* Description */}
-            <p className="mb-6 text-sm leading-relaxed text-white/60">
-              {service.description}
-            </p>
-
-            {/* Features List - Collapsible */}
-            <AnimatePresence>
-              {isActive && (
-                <motion.div
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="overflow-hidden"
-                >
-                  <div className="mb-4 space-y-2 rounded-xl border border-white/5 bg-white/5 p-4">
-                    {service.features.map((feature, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.3, delay: i * 0.05 }}
-                        className="flex items-center gap-2"
-                      >
-                        <CheckCircle
-                          className="h-4 w-4 flex-shrink-0"
-                          style={{ color: service.color }}
-                        />
-                        <span className="text-xs text-white/70">{feature}</span>
-                      </motion.div>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* Learn More Button */}
-            <motion.button
-              onClick={onClick}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="group/btn relative w-full overflow-hidden rounded-xl py-3 font-mono text-sm font-bold uppercase tracking-wider"
-            >
-              <div
-                className="absolute inset-0 transition-opacity duration-300 group-hover/btn:opacity-90"
-                style={{
-                  background: `linear-gradient(135deg, ${service.color}40, ${service.color}20)`,
-                }}
-              />
-              <div className="absolute inset-0 rounded-xl border" style={{ borderColor: `${service.color}40` }} />
-              
-              <span className="relative flex items-center justify-center gap-2" style={{ color: service.color }}>
-                {isActive ? 'Show Less' : 'Learn More'}
-                <motion.div
-                  animate={{ rotate: isActive ? 90 : 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <ChevronRight className="h-4 w-4" />
-                </motion.div>
-              </span>
-            </motion.button>
-          </div>
-
-          {/* Data Stream Effect */}
-          <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-            <motion.div
-              animate={{ y: ['-100%', '100%'] }}
-              transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-              className="absolute left-0 top-0 h-full w-px"
-              style={{
-                background: `linear-gradient(to bottom, transparent, ${service.color}, transparent)`,
-              }}
-            />
-          </div>
+      <div className="relative mx-auto max-w-7xl">
+        <div className="mb-16 text-center">
+          <h2 className="mb-4 text-4xl font-black text-white md:text-5xl">
+            Trusted by Thousands
+          </h2>
+          <p className="text-xl text-white/80">
+            The numbers speak for themselves
+          </p>
         </div>
-      </motion.div>
-    </motion.div>
+
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          {stats.map((stat, i) => {
+            const Icon = stat.icon;
+            return (
+              <div key={i} className="rounded-2xl border border-white/20 bg-white/10 p-8 text-center backdrop-blur-sm">
+                <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-xl bg-white/20">
+                  <Icon className="h-8 w-8 text-white" />
+                </div>
+                <div className="mb-2 text-4xl font-black text-white">{stat.value}</div>
+                <div className="text-sm font-medium text-white/80">{stat.label}</div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Diagonal Bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-white" style={{ clipPath: 'polygon(0 100%, 100% 0, 100% 100%)' }} />
+    </section>
   );
 };
 
 const BottomCTA = () => {
   return (
-    <section className="relative px-4 py-24 sm:px-6 lg:px-8">
+    <section className="relative px-4 py-32 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-4xl text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <h2 className="mb-6 text-4xl font-black uppercase tracking-tight text-white sm:text-5xl">
-            Ready to{' '}
-            <span className="bg-gradient-to-r from-[#8C5695] to-[#986AA1] bg-clip-text text-transparent">
-              Get Started?
-            </span>
-          </h2>
+        <h2 className="mb-6 text-4xl font-black text-gray-900 sm:text-5xl md:text-6xl">
+          Ready to{' '}
+          <span className="bg-gradient-to-r from-[#8C5695] to-[#986AA1] bg-clip-text text-transparent">
+            Get Started?
+          </span>
+        </h2>
 
-          <p className="mx-auto mb-10 max-w-2xl text-lg text-white/70">
-            Choose the perfect plan for your needs and launch your project today
-          </p>
+        <p className="mx-auto mb-10 max-w-2xl text-xl text-gray-600">
+          Choose your perfect plan and launch your project today
+        </p>
 
-          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <CTAButton primary href="#">
-              View Pricing Plans
-            </CTAButton>
-            <CTAButton href="#">
-              Contact Sales
-            </CTAButton>
-          </div>
-        </motion.div>
+        <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <Link
+            href="/pricing"
+            className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#8C5695] to-[#986AA1] px-8 py-4 font-bold text-white transition-all hover:scale-105 hover:shadow-xl"
+          >
+            View Pricing Plans
+            <ArrowRight className="h-5 w-5" />
+          </Link>
+          <a
+            href="#"
+            className="rounded-xl border-2 border-[#8C5695] bg-white px-8 py-4 font-bold text-[#8C5695] transition-all hover:bg-[#8C5695] hover:text-white"
+          >
+            Contact Sales
+          </a>
+        </div>
       </div>
     </section>
-  );
-};
-
-const CTAButton = ({ children, primary, href }) => {
-  return (
-    <motion.a
-      href={href}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      className="group relative overflow-hidden rounded-xl px-8 py-4 font-mono text-sm font-bold uppercase tracking-wider"
-    >
-      <div
-        className={`absolute inset-0 ${
-          primary ? 'bg-gradient-to-r from-[#8C5695] to-[#986AA1]' : 'bg-white/5'
-        }`}
-      />
-      
-      <motion.div
-        className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform group-hover:translate-x-full"
-        transition={{ duration: 0.6 }}
-      />
-
-      <div
-        className={`absolute inset-0 rounded-xl border-2 ${
-          primary ? 'border-[#8C5695]/50' : 'border-[#8C5695]/30'
-        }`}
-      />
-
-      <span className="relative flex items-center gap-2 text-white">
-        {children}
-        <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-      </span>
-    </motion.a>
   );
 };
 

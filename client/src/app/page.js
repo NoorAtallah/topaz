@@ -4,12 +4,14 @@ import MacOSKeyboard from "@/components/keyboardSection";
 import FeaturesSection from "@/components/whyUsSection";
 import PricingSection from "@/components/pricingSection";
 import TestimonialsSection from "@/components/testemonilas";
+import GlobSection from "@/components/gloveSection";
 export default function Home() {
   return (
     <div>
       <HeroSection />
       <ServicesSection />
-      <MacOSKeyboard />
+      <GlobSection />
+      {/* <MacOSKeyboard /> */}
       <FeaturesSection />
       <PricingSection />
       <TestimonialsSection />

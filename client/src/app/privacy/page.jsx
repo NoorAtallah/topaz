@@ -58,15 +58,15 @@ const PrivacyPolicyPage = () => {
   ];
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-black">
+    <div className="relative min-h-screen overflow-hidden bg-white">
       {/* Background Effects */}
       <div className="fixed inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0a0514] to-black" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-[#faf8fb] to-white" />
         
         <motion.div
           animate={{
             scale: [1, 1.2, 1],
-            opacity: [0.08, 0.15, 0.08],
+            opacity: [0.05, 0.08, 0.05],
           }}
           transition={{ duration: 15, repeat: Infinity }}
           className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-[#8C5695] blur-[120px]"
@@ -74,7 +74,7 @@ const PrivacyPolicyPage = () => {
         <motion.div
           animate={{
             scale: [1, 1.3, 1],
-            opacity: [0.08, 0.15, 0.08],
+            opacity: [0.05, 0.08, 0.05],
           }}
           transition={{ duration: 18, repeat: Infinity }}
           className="absolute right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-[#986AA1] blur-[120px]"
@@ -117,8 +117,8 @@ const PrivacyPolicyPage = () => {
             onClick={scrollToTop}
             className="fixed bottom-8 right-8 z-50 group"
           >
-            <div className="absolute inset-0 rounded-full bg-[#8C5695] opacity-50 blur-xl transition-opacity group-hover:opacity-100" />
-            <div className="relative flex h-12 w-12 items-center justify-center rounded-full border-2 border-[#8C5695] bg-black backdrop-blur-sm transition-colors hover:bg-[#8C5695]/20">
+            <div className="absolute inset-0 rounded-full bg-[#8C5695] opacity-30 blur-xl transition-opacity group-hover:opacity-50" />
+            <div className="relative flex h-12 w-12 items-center justify-center rounded-full border-2 border-[#8C5695] bg-white shadow-lg backdrop-blur-sm transition-colors hover:bg-[#8C5695]/5">
               <ArrowUp className="h-5 w-5 text-[#8C5695]" />
             </div>
           </motion.button>
@@ -144,10 +144,10 @@ const HeroSection = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#8C5695]/40 bg-[#8C5695]/5 px-6 py-2 backdrop-blur-sm"
+            className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#8C5695]/20 bg-[#8C5695]/5 px-6 py-2 backdrop-blur-sm"
           >
             <Shield className="h-4 w-4 text-[#8C5695]" />
-            <span className="font-mono text-sm font-medium tracking-wider text-white/90">
+            <span className="font-mono text-sm font-medium tracking-wider text-gray-700">
               YOUR PRIVACY MATTERS
             </span>
           </motion.div>
@@ -157,7 +157,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="mb-6 text-5xl font-black uppercase tracking-tight text-white sm:text-6xl md:text-7xl"
+            className="mb-6 text-5xl font-black uppercase tracking-tight text-gray-900 sm:text-6xl md:text-7xl"
           >
             Privacy{' '}
             <span className="bg-gradient-to-r from-[#8C5695] to-[#986AA1] bg-clip-text text-transparent">
@@ -170,7 +170,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="mx-auto mb-6 max-w-3xl text-xl font-semibold text-white"
+            className="mx-auto mb-6 max-w-3xl text-xl font-semibold text-gray-900"
           >
             Your privacy is important to us
           </motion.p>
@@ -179,7 +179,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="mx-auto mb-8 max-w-3xl text-lg text-white/70"
+            className="mx-auto mb-8 max-w-3xl text-lg text-gray-600"
           >
             This Privacy Policy explains how we collect, use, protect, and handle your personal 
             information when you use our VPS hosting services.
@@ -190,9 +190,9 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="inline-flex items-center gap-2 rounded-lg border border-[#8C5695]/30 bg-[#8C5695]/10 px-4 py-2"
+            className="inline-flex items-center gap-2 rounded-lg border border-[#8C5695]/20 bg-[#8C5695]/5 px-4 py-2"
           >
-            <span className="font-mono text-sm text-white/60">Effective Date:</span>
+            <span className="font-mono text-sm text-gray-600">Effective Date:</span>
             <span className="font-mono text-sm font-bold text-[#8C5695]">{effectiveDate}</span>
           </motion.div>
         </motion.div>
@@ -219,7 +219,7 @@ const SidebarNav = ({ sections, activeSection }) => {
       transition={{ duration: 0.6 }}
       className="sticky top-24"
     >
-      <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-black/90 to-black/70 p-6 backdrop-blur-xl">
+      <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm backdrop-blur-xl">
         <h3 className="mb-4 font-mono text-sm font-bold uppercase tracking-wider text-[#8C5695]">
           Quick Navigation
         </h3>
@@ -235,8 +235,8 @@ const SidebarNav = ({ sections, activeSection }) => {
                 onClick={() => scrollToSection(section.id)}
                 className={`group flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left transition-all ${
                   isActive
-                    ? 'bg-[#8C5695]/20 text-white'
-                    : 'text-white/60 hover:bg-white/5 hover:text-white'
+                    ? 'bg-[#8C5695]/10 text-gray-900'
+                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                 }`}
               >
                 <Icon className={`h-4 w-4 flex-shrink-0 ${isActive ? 'text-[#8C5695]' : ''}`} />
@@ -265,39 +265,39 @@ const PolicyContent = () => {
         <p className="mb-4">We may collect the following types of information:</p>
         <ul className="space-y-3">
           <li className="flex items-start gap-3">
-            <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[#8C5695]/20 mt-0.5">
+            <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[#8C5695]/10 mt-0.5">
               <CheckCircle className="h-4 w-4 text-[#8C5695]" />
             </div>
             <div>
-              <strong className="text-white">Personal Information:</strong>
-              <span className="text-white/80"> Name, email, phone number, billing address, and payment details.</span>
+              <strong className="text-gray-900">Personal Information:</strong>
+              <span className="text-gray-700"> Name, email, phone number, billing address, and payment details.</span>
             </div>
           </li>
           <li className="flex items-start gap-3">
-            <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[#8C5695]/20 mt-0.5">
+            <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[#8C5695]/10 mt-0.5">
               <CheckCircle className="h-4 w-4 text-[#8C5695]" />
             </div>
             <div>
-              <strong className="text-white">Account Information:</strong>
-              <span className="text-white/80"> Login credentials, support tickets, preferences, etc.</span>
+              <strong className="text-gray-900">Account Information:</strong>
+              <span className="text-gray-700"> Login credentials, support tickets, preferences, etc.</span>
             </div>
           </li>
           <li className="flex items-start gap-3">
-            <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[#8C5695]/20 mt-0.5">
+            <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[#8C5695]/10 mt-0.5">
               <CheckCircle className="h-4 w-4 text-[#8C5695]" />
             </div>
             <div>
-              <strong className="text-white">Technical Information:</strong>
-              <span className="text-white/80"> IP address, browser type, operating system, and usage data.</span>
+              <strong className="text-gray-900">Technical Information:</strong>
+              <span className="text-gray-700"> IP address, browser type, operating system, and usage data.</span>
             </div>
           </li>
           <li className="flex items-start gap-3">
-            <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[#8C5695]/20 mt-0.5">
+            <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[#8C5695]/10 mt-0.5">
               <CheckCircle className="h-4 w-4 text-[#8C5695]" />
             </div>
             <div>
-              <strong className="text-white">Server Activity:</strong>
-              <span className="text-white/80"> Data related to your VPS hosting, control panel usage, and API interactions.</span>
+              <strong className="text-gray-900">Server Activity:</strong>
+              <span className="text-gray-700"> Data related to your VPS hosting, control panel usage, and API interactions.</span>
             </div>
           </li>
         </ul>
@@ -351,8 +351,8 @@ const PolicyContent = () => {
           <SecurityFeature icon={UserCheck} label="Two-Factor Authentication" />
           <SecurityFeature icon={Server} label="Regular Security Audits" />
         </div>
-        <div className="rounded-lg border border-[#8C5695]/30 bg-[#8C5695]/10 p-4">
-          <p className="flex items-center gap-2 font-semibold text-white">
+        <div className="rounded-lg border border-[#8C5695]/20 bg-[#8C5695]/5 p-4">
+          <p className="flex items-center gap-2 font-semibold text-gray-900">
             <Shield className="h-5 w-5 text-[#8C5695]" />
             We do not sell or rent your personal data to third parties.
           </p>
@@ -369,7 +369,7 @@ const PolicyContent = () => {
           We may share limited information with trusted third-party services (e.g., payment gateways, 
           control panel license providers, domain registrars) only to the extent required to deliver our services.
         </p>
-        <p className="text-white/70">
+        <p className="text-gray-600">
           All third parties are obligated to comply with privacy and data protection laws.
         </p>
       </PolicySection>
@@ -395,7 +395,7 @@ const PolicyContent = () => {
             <span>Remember user preferences</span>
           </li>
         </ul>
-        <p className="text-white/70">
+        <p className="text-gray-600">
           You can control or disable cookies through your browser settings at any time.
         </p>
       </PolicySection>
@@ -425,7 +425,7 @@ const PolicyContent = () => {
             <span>File a complaint with a data protection authority</span>
           </li>
         </ul>
-        <p className="text-white/70">
+        <p className="text-gray-600">
           To exercise these rights, please contact us at{' '}
           <a href="mailto:info@topaz-technology.com" className="font-semibold text-[#8C5695] hover:underline">
             info@topaz-technology.com
@@ -487,24 +487,24 @@ const PolicySection = ({ id, title, icon: Icon, children }) => {
     >
       <div className="absolute -inset-2 rounded-3xl bg-gradient-to-r from-[#8C5695]/10 to-[#986AA1]/5 opacity-0 blur-xl transition-opacity group-hover:opacity-100" />
       
-      <div className="relative rounded-3xl border border-white/10 bg-gradient-to-br from-black/90 to-black/70 p-8 backdrop-blur-xl">
+      <div className="relative rounded-3xl border border-gray-200 bg-white p-8 shadow-sm backdrop-blur-xl">
         {/* Section Header */}
         <div className="mb-6 flex items-start gap-4">
           <div className="relative flex-shrink-0">
-            <div className="absolute inset-0 rounded-xl bg-[#8C5695] opacity-30 blur-lg" />
-            <div className="relative flex h-12 w-12 items-center justify-center rounded-xl border border-[#8C5695]/40 bg-gradient-to-br from-[#8C5695]/20 to-[#986AA1]/10">
+            <div className="absolute inset-0 rounded-xl bg-[#8C5695] opacity-20 blur-lg" />
+            <div className="relative flex h-12 w-12 items-center justify-center rounded-xl border border-[#8C5695]/20 bg-gradient-to-br from-[#8C5695]/10 to-[#986AA1]/5">
               <Icon className="h-6 w-6 text-[#8C5695]" />
             </div>
           </div>
 
           <div className="flex-1">
-            <h2 className="text-2xl font-bold text-white">{title}</h2>
+            <h2 className="text-2xl font-bold text-gray-900">{title}</h2>
           </div>
         </div>
 
         {/* Section Content */}
-        <div className="prose prose-invert max-w-none">
-          <div className="space-y-4 text-white/80 leading-relaxed">
+        <div className="prose prose-gray max-w-none">
+          <div className="space-y-4 text-gray-700 leading-relaxed">
             {children}
           </div>
         </div>
@@ -516,10 +516,10 @@ const PolicySection = ({ id, title, icon: Icon, children }) => {
 const SecurityFeature = ({ icon: Icon, label }) => {
   return (
     <div className="flex items-center gap-3 rounded-lg border border-[#8C5695]/20 bg-[#8C5695]/5 p-4">
-      <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-[#8C5695]/20">
+      <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-[#8C5695]/10">
         <Icon className="h-5 w-5 text-[#8C5695]" />
       </div>
-      <span className="font-semibold text-white">{label}</span>
+      <span className="font-semibold text-gray-900">{label}</span>
     </div>
   );
 };
@@ -533,22 +533,22 @@ const ContactSection = () => {
       transition={{ duration: 0.6 }}
       className="relative"
     >
-      <div className="absolute -inset-2 rounded-3xl bg-gradient-to-r from-[#8C5695]/20 to-[#986AA1]/10 blur-2xl" />
+      <div className="absolute -inset-2 rounded-3xl bg-gradient-to-r from-[#8C5695]/10 to-[#986AA1]/5 blur-2xl" />
       
-      <div className="relative rounded-3xl border border-[#8C5695]/30 bg-gradient-to-br from-[#8C5695]/10 to-[#986AA1]/5 p-8 text-center backdrop-blur-xl">
+      <div className="relative rounded-3xl border border-[#8C5695]/20 bg-gradient-to-br from-[#8C5695]/5 to-[#986AA1]/5 p-8 text-center shadow-lg backdrop-blur-xl">
         <div className="mb-6 inline-flex">
           <div className="relative">
-            <div className="absolute inset-0 rounded-2xl bg-[#8C5695] opacity-50 blur-xl" />
-            <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl border-2 border-[#8C5695]/50 bg-gradient-to-br from-[#8C5695]/20 to-[#986AA1]/20">
+            <div className="absolute inset-0 rounded-2xl bg-[#8C5695] opacity-30 blur-xl" />
+            <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl border-2 border-[#8C5695]/30 bg-gradient-to-br from-[#8C5695]/10 to-[#986AA1]/10">
               <Mail className="h-8 w-8 text-[#8C5695]" />
             </div>
           </div>
         </div>
 
-        <h3 className="mb-4 text-2xl font-bold text-white">
+        <h3 className="mb-4 text-2xl font-bold text-gray-900">
           Questions About Your Privacy?
         </h3>
-        <p className="mb-6 text-white/70">
+        <p className="mb-6 text-gray-600">
           If you have any questions or concerns about this Privacy Policy or how we handle your data, 
           please don't hesitate to contact us.
         </p>

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 const Navbar = () => {
@@ -31,8 +32,8 @@ const Navbar = () => {
     { name: 'Pricing Plans', href: '/pricing', code: '02' },
     { name: 'About Us', href: '/about', code: '03' },
     { name: 'FAQ', href: '/faq', code: '05' },
-    { name: 'Terms & Conditions', href: '/terms', code: '06' },
-    { name: 'Privacy Policy', href: '/privacy', code: '07' },
+    // { name: 'Terms & Conditions', href: '/terms', code: '06' },
+    // { name: 'Privacy Policy', href: '/privacy', code: '07' },
   ];
 
   return (
@@ -40,7 +41,7 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-1000 transition-all duration-500 ${
         isScrolled
           ? 'bg-white/95 backdrop-blur-2xl shadow-lg shadow-[#8C5695]/10'
           : 'bg-white/80 backdrop-blur-md'
@@ -69,46 +70,20 @@ const Navbar = () => {
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between">
-          {/* Logo Section */}
+          {/* Logo Section with Image */}
           <Link href="/" className="relative group">
             <div className="flex items-center gap-4">
-              {/* Tech Logo */}
-              <div className="relative">
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-                  className="relative h-12 w-12"
-                >
-                  {/* Hexagon Border */}
-                  <svg viewBox="0 0 100 100" className="absolute inset-0">
-                    <defs>
-                      <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#8C5695" />
-                        <stop offset="100%" stopColor="#986AA1" />
-                      </linearGradient>
-                    </defs>
-                    <polygon
-                      points="50,5 90,27.5 90,72.5 50,95 10,72.5 10,27.5"
-                      fill="none"
-                      stroke="url(#logo-grad)"
-                      strokeWidth="2"
-                    />
-                    <polygon
-                      points="50,15 80,32.5 80,67.5 50,85 20,67.5 20,32.5"
-                      fill="rgba(140,86,149,0.05)"
-                      stroke="url(#logo-grad)"
-                      strokeWidth="1"
-                    />
-                  </svg>
-                  
-                  {/* Center T */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-2xl font-black bg-gradient-to-br from-[#8C5695] to-[#986AA1] bg-clip-text text-transparent">
-                      T
-                    </span>
-                  </div>
-                </motion.div>
-
+              {/* Logo Image Container */}
+              <div className="relative h-12 w-12">
+                {/* Replace '/logo.png' with your actual logo path */}
+                <Image
+                  src="/images/1.png"
+                  alt="TOPAZ Logo"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+                
                 {/* Glow Effect */}
                 <motion.div
                   animate={{
@@ -116,7 +91,7 @@ const Navbar = () => {
                     opacity: [0.1, 0.2, 0.1],
                   }}
                   transition={{ duration: 2, repeat: Infinity }}
-                  className="absolute inset-0 rounded-full bg-[#8C5695] blur-xl"
+                  className="absolute inset-0 rounded-full bg-[#8C5695] blur-xl -z-10"
                 />
 
                 {/* Corner Brackets */}
@@ -142,13 +117,13 @@ const Navbar = () => {
                       repeat: Infinity,
                       repeatDelay: 5,
                     }}
-                    className="absolute top-0 left-0 font-black text-2xl tracking-tighter text-[#8C5695]"
+                    className="absolute top-0 left-0 font-black text-xl tracking-tighter text-[#8C5695]"
                   >
                     TOPAZ
                   </motion.span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="font-mono text-[5px] tracking-[0.3em] text-[#8C5695]">
+                  <span className="font-mono text-[6px] tracking-[0.3em] text-[#8C5695]">
                     Smart Solutions,Trusted Performance
                   </span>
                   <motion.div

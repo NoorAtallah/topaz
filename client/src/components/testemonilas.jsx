@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Quote, Star, ChevronLeft, ChevronRight, User } from 'lucide-react';
+import { Quote, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const TestimonialsSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -55,59 +55,32 @@ const TestimonialsSection = () => {
 
   const variants = {
     enter: (direction) => ({
-      x: direction > 0 ? 1000 : -1000,
+      x: direction > 0 ? 300 : -300,
       opacity: 0,
-      scale: 0.8,
-      rotateY: direction > 0 ? 45 : -45,
     }),
     center: {
       zIndex: 1,
       x: 0,
       opacity: 1,
-      scale: 1,
-      rotateY: 0,
     },
     exit: (direction) => ({
       zIndex: 0,
-      x: direction < 0 ? 1000 : -1000,
+      x: direction < 0 ? 300 : -300,
       opacity: 0,
-      scale: 0.8,
-      rotateY: direction < 0 ? 45 : -45,
     }),
   };
 
   return (
-    <section className="relative overflow-hidden bg-black py-24 md:py-32">
+    <section className="relative overflow-hidden bg-gradient-to-b from-white via-purple-50/20 to-white py-24 md:py-32">
       {/* Background Effects */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0f0520] to-black" />
-        
-        {/* Animated Gradient Orbs */}
-        <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            x: [0, 50, 0],
-            opacity: [0.2, 0.4, 0.2],
-          }}
-          transition={{ duration: 10, repeat: Infinity }}
-          className="absolute left-0 top-1/4 h-96 w-96 rounded-full bg-[#8C5695] blur-[120px]"
-        />
-        <motion.div
-          animate={{
-            scale: [1, 1.3, 1],
-            x: [0, -50, 0],
-            opacity: [0.2, 0.4, 0.2],
-          }}
-          transition={{ duration: 12, repeat: Infinity, delay: 1 }}
-          className="absolute right-0 bottom-1/4 h-96 w-96 rounded-full bg-[#986AA1] blur-[120px]"
-        />
+        {/* Static Gradient Orbs */}
+        <div className="absolute left-0 top-1/4 h-96 w-96 rounded-full bg-[#8C5695] opacity-5 blur-[120px]" />
+        <div className="absolute right-0 bottom-1/4 h-96 w-96 rounded-full bg-[#986AA1] opacity-5 blur-[120px]" />
       </div>
 
-      {/* Floating Particles */}
-      <FloatingParticles />
-
       {/* Quote Pattern Overlay */}
-      <div className="pointer-events-none absolute inset-0 opacity-5">
+      <div className="pointer-events-none absolute inset-0 opacity-[0.02]">
         <svg className="h-full w-full" xmlns="http://www.w3.org/2000/svg">
           <pattern id="quotes" x="0" y="0" width="200" height="200" patternUnits="userSpaceOnUse">
             <text x="50" y="100" fontSize="48" fill="#8C5695" opacity="0.3" fontFamily="serif">"</text>
@@ -131,10 +104,10 @@ const TestimonialsSection = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#8C5695]/40 bg-[#8C5695]/5 px-6 py-2 backdrop-blur-sm"
+            className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#8C5695]/20 bg-white px-6 py-2 shadow-sm"
           >
             <Quote className="h-4 w-4 text-[#8C5695]" />
-            <span className="font-mono text-sm font-medium tracking-wider text-white/90">
+            <span className="font-mono text-sm font-medium tracking-wider text-[#8C5695]">
               TESTIMONIALS
             </span>
           </motion.div>
@@ -144,7 +117,7 @@ const TestimonialsSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-4 text-4xl font-black uppercase tracking-tight text-white sm:text-5xl md:text-6xl"
+            className="mb-4 text-4xl font-black uppercase tracking-tight text-gray-900 sm:text-5xl md:text-6xl"
           >
             Trusted by{' '}
             <span className="bg-gradient-to-r from-[#8C5695] to-[#986AA1] bg-clip-text text-transparent">
@@ -157,7 +130,7 @@ const TestimonialsSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="mx-auto max-w-2xl text-lg text-white/60"
+            className="mx-auto max-w-2xl text-lg text-gray-600"
           >
             See what our customers say about their experience
           </motion.p>
@@ -166,22 +139,12 @@ const TestimonialsSection = () => {
         {/* Main Testimonial Display */}
         <div className="relative mx-auto max-w-5xl">
           {/* Giant Quote Marks */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.1 }}
-            transition={{ duration: 1 }}
-            className="pointer-events-none absolute -left-8 -top-8 text-[200px] font-serif leading-none text-[#8C5695] md:-left-16 md:-top-16 md:text-[300px]"
-          >
+          <div className="pointer-events-none absolute -left-8 -top-8 text-[200px] font-serif leading-none text-[#8C5695] opacity-5 md:-left-16 md:-top-16 md:text-[300px]">
             "
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.1 }}
-            transition={{ duration: 1 }}
-            className="pointer-events-none absolute -bottom-8 -right-8 rotate-180 text-[200px] font-serif leading-none text-[#986AA1] md:-bottom-16 md:-right-16 md:text-[300px]"
-          >
+          </div>
+          <div className="pointer-events-none absolute -bottom-8 -right-8 rotate-180 text-[200px] font-serif leading-none text-[#986AA1] opacity-5 md:-bottom-16 md:-right-16 md:text-[300px]">
             "
-          </motion.div>
+          </div>
 
           {/* Testimonial Card Container */}
           <div className="relative min-h-[400px] md:min-h-[500px]">
@@ -195,9 +158,7 @@ const TestimonialsSection = () => {
                 exit="exit"
                 transition={{
                   x: { type: 'spring', stiffness: 300, damping: 30 },
-                  opacity: { duration: 0.2 },
-                  scale: { duration: 0.2 },
-                  rotateY: { duration: 0.4 },
+                  opacity: { duration: 0.3 },
                 }}
                 className="absolute inset-0"
               >
@@ -215,8 +176,8 @@ const TestimonialsSection = () => {
               onClick={() => paginate(-1)}
               className="group relative"
             >
-              <div className="absolute inset-0 rounded-full bg-[#8C5695] opacity-20 blur-xl transition-opacity group-hover:opacity-40" />
-              <div className="relative flex h-12 w-12 items-center justify-center rounded-full border border-[#8C5695]/40 bg-black/50 backdrop-blur-sm transition-colors hover:border-[#8C5695] hover:bg-[#8C5695]/10">
+              <div className="absolute inset-0 rounded-full bg-[#8C5695] opacity-10 blur-xl transition-opacity group-hover:opacity-20" />
+              <div className="relative flex h-12 w-12 items-center justify-center rounded-full border border-[#8C5695]/40 bg-white shadow-lg backdrop-blur-sm transition-colors hover:border-[#8C5695] hover:bg-[#8C5695]/5">
                 <ChevronLeft className="h-6 w-6 text-[#8C5695]" />
               </div>
             </motion.button>
@@ -237,15 +198,9 @@ const TestimonialsSection = () => {
                     className={`h-2 w-2 rounded-full transition-all duration-300 ${
                       index === activeIndex
                         ? 'w-8 bg-gradient-to-r from-[#8C5695] to-[#986AA1]'
-                        : 'bg-white/20'
+                        : 'bg-gray-300'
                     }`}
                   />
-                  {index === activeIndex && (
-                    <motion.div
-                      layoutId="activeIndicator"
-                      className="absolute inset-0 rounded-full bg-[#8C5695] opacity-50 blur-sm"
-                    />
-                  )}
                 </motion.button>
               ))}
             </div>
@@ -257,8 +212,8 @@ const TestimonialsSection = () => {
               onClick={() => paginate(1)}
               className="group relative"
             >
-              <div className="absolute inset-0 rounded-full bg-[#986AA1] opacity-20 blur-xl transition-opacity group-hover:opacity-40" />
-              <div className="relative flex h-12 w-12 items-center justify-center rounded-full border border-[#986AA1]/40 bg-black/50 backdrop-blur-sm transition-colors hover:border-[#986AA1] hover:bg-[#986AA1]/10">
+              <div className="absolute inset-0 rounded-full bg-[#986AA1] opacity-10 blur-xl transition-opacity group-hover:opacity-20" />
+              <div className="relative flex h-12 w-12 items-center justify-center rounded-full border border-[#986AA1]/40 bg-white shadow-lg backdrop-blur-sm transition-colors hover:border-[#986AA1] hover:bg-[#986AA1]/5">
                 <ChevronRight className="h-6 w-6 text-[#986AA1]" />
               </div>
             </motion.button>
@@ -286,12 +241,12 @@ const TestimonialCard = ({ testimonial }) => {
   return (
     <div className="relative h-full">
       {/* Card Background with Glow */}
-      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#8C5695]/10 to-[#986AA1]/5 blur-xl" />
+      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#8C5695]/5 to-[#986AA1]/5 blur-xl" />
       
       {/* Main Card */}
-      <div className="relative rounded-3xl border border-white/10 bg-gradient-to-br from-black/90 to-black/70 p-8 backdrop-blur-xl md:p-12">
-        {/* Holographic Corner Accent */}
-        <div className="absolute right-0 top-0 h-32 w-32 overflow-hidden rounded-tr-3xl opacity-20">
+      <div className="relative rounded-3xl border border-[#8C5695]/20 bg-white p-8 shadow-2xl backdrop-blur-xl md:p-12">
+        {/* Corner Accent */}
+        <div className="absolute right-0 top-0 h-32 w-32 overflow-hidden rounded-tr-3xl opacity-10">
           <div className="absolute inset-0 bg-gradient-to-br from-[#8C5695] via-[#986AA1] to-transparent" />
         </div>
 
@@ -322,7 +277,7 @@ const TestimonialCard = ({ testimonial }) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="relative mb-8 text-2xl font-medium leading-relaxed text-white md:text-3xl md:leading-relaxed"
+          className="relative mb-8 text-2xl font-medium leading-relaxed text-gray-900 md:text-3xl md:leading-relaxed"
         >
           {testimonial.quote}
         </motion.blockquote>
@@ -336,9 +291,9 @@ const TestimonialCard = ({ testimonial }) => {
         >
           {/* Avatar */}
           <div className="relative">
-            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#8C5695] to-[#986AA1] opacity-50 blur-md" />
-            <div className="relative flex h-14 w-14 items-center justify-center rounded-full border-2 border-[#8C5695]/50 bg-gradient-to-br from-[#8C5695]/20 to-[#986AA1]/20 backdrop-blur-sm">
-              <span className="font-mono text-sm font-bold text-white">
+            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#8C5695] to-[#986AA1] opacity-20 blur-md" />
+            <div className="relative flex h-14 w-14 items-center justify-center rounded-full border-2 border-[#8C5695]/30 bg-gradient-to-br from-[#8C5695]/10 to-[#986AA1]/10 backdrop-blur-sm">
+              <span className="font-mono text-sm font-bold text-[#8C5695]">
                 {testimonial.avatar}
               </span>
             </div>
@@ -346,32 +301,19 @@ const TestimonialCard = ({ testimonial }) => {
 
           {/* Name and Role */}
           <div>
-            <div className="font-bold text-white">{testimonial.author}</div>
+            <div className="font-bold text-gray-900">{testimonial.author}</div>
             <div className="font-mono text-sm text-[#8C5695]">{testimonial.role}</div>
           </div>
 
           {/* Verified Badge */}
-          <motion.div
-            animate={{ scale: [1, 1.1, 1] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="ml-auto"
-          >
+          <div className="ml-auto">
             <div className="rounded-full border border-[#8C5695]/40 bg-[#8C5695]/10 px-3 py-1">
               <span className="font-mono text-xs font-semibold uppercase tracking-wider text-[#8C5695]">
                 Verified
               </span>
             </div>
-          </motion.div>
+          </div>
         </motion.div>
-
-        {/* Decorative Lines */}
-        <div className="absolute bottom-0 left-0 right-0 h-px">
-          <motion.div
-            animate={{ x: ['-100%', '100%'] }}
-            transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
-            className="h-full w-1/3 bg-gradient-to-r from-transparent via-[#8C5695] to-transparent"
-          />
-        </div>
       </div>
     </div>
   );
@@ -389,48 +331,10 @@ const StatItem = ({ value, label }) => {
       <div className="mb-2 bg-gradient-to-r from-[#8C5695] to-[#986AA1] bg-clip-text text-4xl font-black text-transparent md:text-5xl">
         {value}
       </div>
-      <div className="font-mono text-xs uppercase tracking-widest text-white/60">
+      <div className="font-mono text-xs uppercase tracking-widest text-gray-600">
         {label}
       </div>
     </motion.div>
-  );
-};
-
-const FloatingParticles = () => {
-  const particles = Array.from({ length: 20 }, (_, i) => ({
-    id: i,
-    size: Math.random() * 4 + 2,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    duration: Math.random() * 10 + 10,
-    delay: Math.random() * 5,
-  }));
-
-  return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden">
-      {particles.map((particle) => (
-        <motion.div
-          key={particle.id}
-          className="absolute rounded-full bg-[#8C5695]"
-          style={{
-            width: particle.size,
-            height: particle.size,
-            left: `${particle.x}%`,
-            top: `${particle.y}%`,
-          }}
-          animate={{
-            y: [0, -30, 0],
-            opacity: [0.2, 0.8, 0.2],
-          }}
-          transition={{
-            duration: particle.duration,
-            delay: particle.delay,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-      ))}
-    </div>
   );
 };
 

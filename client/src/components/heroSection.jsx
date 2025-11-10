@@ -1,21 +1,11 @@
 'use client';
 
 import React, { useMemo } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
-
+import { motion } from 'framer-motion';
+import Link from 'next/link';
 const HeroSection = () => {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"]
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-
   return (
-    <div ref={containerRef} className="relative h-screen overflow-hidden bg-gradient-to-br from-white via-purple-50/30 to-white">
+    <div className="relative h-screen overflow-hidden bg-gradient-to-br from-white via-purple-50/30 to-white">
       {/* Background Paths Animation */}
       <BackgroundPaths />
       
@@ -42,11 +32,8 @@ const HeroSection = () => {
       {/* Animated Border Lines */}
       <AnimatedBorders />
 
-      {/* Main Content */}
-      <motion.div 
-        style={{ y, opacity }}
-        className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center"
-      >
+      {/* Main Content - No parallax animation */}
+      <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center">
         {/* Status Badge */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -140,18 +127,23 @@ const HeroSection = () => {
         </motion.div>
 
         {/* CTA Buttons */}
+       
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 2.2 }}
-          className="flex flex-col gap-4 sm:flex-row"
+          className="flex flex-col gap-4 sm:flex-row cursor-pointer"
         >
+           <Link href="/pricing" passHref> 
           <HolographicButton primary>
             LAUNCH PROJECT
           </HolographicButton>
+          </Link>
+          <Link href="/services" passHref> 
           <HolographicButton>
             EXPLORE SERVICES
           </HolographicButton>
+           </Link>
         </motion.div>
 
         {/* Tech Stats */}
@@ -177,7 +169,7 @@ const HeroSection = () => {
           <SystemStatus label="DATABASE" />
           <SystemStatus label="SERVERS" />
         </motion.div>
-      </motion.div>
+      </div>
 
       {/* Scroll Indicator */}
       <ScrollIndicator />
@@ -401,7 +393,7 @@ const ScrollIndicator = () => {
         transition={{ duration: 2, repeat: Infinity }}
         className="flex flex-col items-center gap-2"
       >
-        <span className="font-mono text-xs tracking-wider text-gray-500">SCROLL</span>
+        {/* <span className="font-mono text-xs tracking-wider text-gray-500">SCROLL</span> */}
         <div className="h-12 w-6 rounded-full border-2 border-[#8C5695]/40 bg-white/50 backdrop-blur-sm">
           <motion.div
             animate={{ y: [4, 16, 4] }}

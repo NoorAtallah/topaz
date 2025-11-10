@@ -65,16 +65,16 @@ const FeaturesSection = () => {
   ];
 
   return (
-    <section className="relative overflow-hidden bg-black py-24 md:py-32">
+    <section className="relative overflow-hidden bg-gradient-to-b from-white via-purple-50/30 to-white py-24 md:py-32">
       {/* Background Effects */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(140,86,149,0.1),transparent_50%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(152,106,161,0.15),transparent_40%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(140,86,149,0.15),transparent_40%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(140,86,149,0.05),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(152,106,161,0.08),transparent_40%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(140,86,149,0.08),transparent_40%)]" />
       </div>
 
       {/* Animated Grid Lines */}
-      <div className="pointer-events-none absolute inset-0 opacity-20">
+      <div className="pointer-events-none absolute inset-0 opacity-[0.03]">
         <svg className="h-full w-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
@@ -99,10 +99,10 @@ const FeaturesSection = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#8C5695]/40 bg-[#8C5695]/5 px-6 py-2 backdrop-blur-sm"
+            className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#8C5695]/40 bg-white px-6 py-2 backdrop-blur-sm shadow-sm"
           >
             <div className="h-2 w-2 rounded-full bg-[#8C5695] animate-pulse" />
-            <span className="font-mono text-sm font-medium tracking-wider text-white/90">
+            <span className="font-mono text-sm font-medium tracking-wider text-[#8C5695]">
               EVERYTHING YOU NEED
             </span>
           </motion.div>
@@ -112,7 +112,7 @@ const FeaturesSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-4 text-4xl font-black uppercase tracking-tight text-white sm:text-5xl md:text-6xl"
+            className="mb-4 text-4xl font-black uppercase tracking-tight text-gray-900 sm:text-5xl md:text-6xl"
           >
             Built for{' '}
             <span className="bg-gradient-to-r from-[#8C5695] to-[#986AA1] bg-clip-text text-transparent">
@@ -125,7 +125,7 @@ const FeaturesSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="mx-auto max-w-2xl text-lg text-white/60"
+            className="mx-auto max-w-2xl text-lg text-gray-600"
           >
             Enterprise-grade features designed to power your digital infrastructure
           </motion.p>
@@ -232,16 +232,16 @@ const HexagonNetwork = ({ features, activeFeature, setActiveFeature }) => {
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
             style={{ zIndex: 10 }}
           >
-            <div className="relative w-80 rounded-2xl border border-[#8C5695]/40 bg-black/90 p-8 backdrop-blur-xl">
-              <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-[#8C5695] to-[#986AA1] opacity-30 blur" />
+            <div className="relative w-80 rounded-2xl border border-[#8C5695]/40 bg-white/95 p-8 backdrop-blur-xl shadow-2xl">
+              <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-[#8C5695] to-[#986AA1] opacity-20 blur" />
               <div className="relative">
                 <h3 className="mb-2 font-mono text-xs font-semibold uppercase tracking-widest text-[#8C5695]">
                   {features.find(f => f.id === activeFeature)?.title}
                 </h3>
-                <h4 className="mb-4 text-2xl font-bold text-white">
+                <h4 className="mb-4 text-2xl font-bold text-gray-900">
                   {features.find(f => f.id === activeFeature)?.headline}
                 </h4>
-                <p className="text-white/70">
+                <p className="text-gray-600">
                   {features.find(f => f.id === activeFeature)?.description}
                 </p>
               </div>
@@ -279,7 +279,7 @@ const HexagonNode = ({ feature, index, isActive, onHover, onLeave }) => {
         <motion.div
           animate={{
             scale: isActive ? [1, 1.3, 1] : 1,
-            opacity: isActive ? [0.5, 1, 0.5] : 0.3,
+            opacity: isActive ? [0.3, 0.6, 0.3] : 0.2,
           }}
           transition={{ duration: 2, repeat: Infinity }}
           className="absolute inset-0 -m-4 rounded-full blur-xl"
@@ -290,8 +290,8 @@ const HexagonNode = ({ feature, index, isActive, onHover, onLeave }) => {
         <svg width="100" height="100" viewBox="0 0 100 100" className="relative">
           <defs>
             <linearGradient id={`grad-${feature.id}`} x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor={feature.color} stopOpacity="0.3" />
-              <stop offset="100%" stopColor={feature.color} stopOpacity="0.1" />
+              <stop offset="0%" stopColor={feature.color} stopOpacity="0.2" />
+              <stop offset="100%" stopColor={feature.color} stopOpacity="0.05" />
             </linearGradient>
           </defs>
           
@@ -309,7 +309,7 @@ const HexagonNode = ({ feature, index, isActive, onHover, onLeave }) => {
           {/* Inner Hexagon */}
           <motion.polygon
             points="50,15 80,32.5 80,67.5 50,85 20,67.5 20,32.5"
-            fill="rgba(0,0,0,0.6)"
+            fill="rgba(255,255,255,0.8)"
             stroke={feature.color}
             strokeWidth="1"
             strokeOpacity="0.5"
@@ -392,8 +392,8 @@ const DiagonalFeatureItem = ({ feature, index, isReversed }) => {
         <svg width="80" height="80" viewBox="0 0 100 100">
           <defs>
             <linearGradient id={`mobile-grad-${feature.id}`} x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor={feature.color} stopOpacity="0.3" />
-              <stop offset="100%" stopColor={feature.color} stopOpacity="0.1" />
+              <stop offset="0%" stopColor={feature.color} stopOpacity="0.2" />
+              <stop offset="100%" stopColor={feature.color} stopOpacity="0.05" />
             </linearGradient>
           </defs>
           <polygon
@@ -423,10 +423,10 @@ const DiagonalFeatureItem = ({ feature, index, isReversed }) => {
           <h3 className="mb-1 font-mono text-xs font-semibold uppercase tracking-widest" style={{ color: feature.color }}>
             {feature.title}
           </h3>
-          <h4 className="mb-2 text-xl font-bold text-white sm:text-2xl">
+          <h4 className="mb-2 text-xl font-bold text-gray-900 sm:text-2xl">
             {feature.headline}
           </h4>
-          <p className="text-sm text-white/60">
+          <p className="text-sm text-gray-600">
             {feature.description}
           </p>
         </div>

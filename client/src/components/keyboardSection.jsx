@@ -125,18 +125,11 @@ const ArrowRightIcon = () => (
     </svg>
 );
 
-//================================================================//
-//  Key Component
-//  A reusable component for rendering each keyboard key.
-//================================================================//
-
 const Key = ({ children, className = '', style = {}, isPressed = false, heightClass = 'h-6' }) => {
-    // Shared style for the inset shadow effect on each key
     const keyInnerBoxShadow = { 
         boxShadow: 'rgb(13, 13, 15) 0px -0.5px 2px 0px inset, rgb(13, 13, 15) -0.5px 0px 2px 0px inset, 0px 0px 1px 0px rgba(255,255,255,0.1)' 
     };
     
-    // Enhanced style for the glowing "pressed" keys with purple theme
     const pressedKeyStyle = isPressed ? {
         boxShadow: '0px 0px 4px 2px #8C5695, 0 0 12px #8C5695, 0 0 20px rgba(140, 86, 149, 0.4)',
         transform: 'translateY(-1px) scale(1.02)',
@@ -163,11 +156,6 @@ const Key = ({ children, className = '', style = {}, isPressed = false, heightCl
         </div>
     );
 };
-
-//================================================================//
-//  Keyboard Component
-//  Assembles all the keys into the final keyboard layout.
-//================================================================//
 
 const Keyboard = ({ pressedKeys }) => {
     const isKeyPressed = (keyId) => pressedKeys.includes(keyId);
@@ -392,132 +380,37 @@ const Keyboard = ({ pressedKeys }) => {
     )
 }
 
-
 export default function MacOSKeyboard() {
     const [pressedKeys, setPressedKeys] = useState([]);
-    const [currentState, setCurrentState] = useState('INITIAL');
-    const [timeRemaining, setTimeRemaining] = useState(0);
-    const [totalDuration, setTotalDuration] = useState(0);
 
     useEffect(() => {
         let timeoutId;
-        let intervalId;
 
         const startSequence = () => {
-            // Phase 1: CMD key only for 300ms (preparing for copy)
-            console.log('Phase 1: CMD-only phase for copy');
-            setCurrentState('CMD_ONLY_FOR_C');
             setPressedKeys(['CMD_LEFT']);
-            setTimeRemaining(300);
-            setTotalDuration(300);
-
-            intervalId = setInterval(() => {
-                setTimeRemaining(prev => Math.max(0, prev - 10));
-            }, 10);
 
             timeoutId = setTimeout(() => {
-                clearInterval(intervalId);
-                
-                // Phase 2: CMD + C for 4.7 seconds
-                console.log('Phase 2: CMD+C phase');
-                setCurrentState('CMD_C');
                 setPressedKeys(['CMD_LEFT', 'C']);
-                setTimeRemaining(4700);
-                setTotalDuration(4700);
-
-                intervalId = setInterval(() => {
-                    setTimeRemaining(prev => Math.max(0, prev - 100));
-                }, 100);
 
                 timeoutId = setTimeout(() => {
-                    clearInterval(intervalId);
-                    
-                    // Phase 3: CMD only for 300ms (releasing C)
-                    console.log('Phase 3: CMD-only phase (releasing C)');
-                    setCurrentState('CMD_ONLY_AFTER_C');
                     setPressedKeys(['CMD_LEFT']);
-                    setTimeRemaining(300);
-                    setTotalDuration(300);
-
-                    intervalId = setInterval(() => {
-                        setTimeRemaining(prev => Math.max(0, prev - 10));
-                    }, 10);
 
                     timeoutId = setTimeout(() => {
-                        clearInterval(intervalId);
-                        
-                        // Phase 4: No keys pressed for remaining 2.7 seconds
-                        console.log('Phase 4: Pause phase after CMD+C');
-                        setCurrentState('PAUSE_AFTER_C');
                         setPressedKeys([]);
-                        setTimeRemaining(2700);
-                        setTotalDuration(2700);
-
-                        intervalId = setInterval(() => {
-                            setTimeRemaining(prev => Math.max(0, prev - 100));
-                        }, 100);
 
                         timeoutId = setTimeout(() => {
-                            clearInterval(intervalId);
-                            
-                            // Phase 5: CMD key only for 300ms (preparing for paste)
-                            console.log('Phase 5: CMD-only phase for paste');
-                            setCurrentState('CMD_ONLY_FOR_V');
                             setPressedKeys(['CMD_LEFT']);
-                            setTimeRemaining(300);
-                            setTotalDuration(300);
-
-                            intervalId = setInterval(() => {
-                                setTimeRemaining(prev => Math.max(0, prev - 10));
-                            }, 10);
 
                             timeoutId = setTimeout(() => {
-                                clearInterval(intervalId);
-                                
-                                // Phase 6: CMD + V for 4.7 seconds
-                                console.log('Phase 6: CMD+V phase');
-                                setCurrentState('CMD_V');
                                 setPressedKeys(['CMD_LEFT', 'V']);
-                                setTimeRemaining(4700);
-                                setTotalDuration(4700);
-
-                                intervalId = setInterval(() => {
-                                    setTimeRemaining(prev => Math.max(0, prev - 100));
-                                }, 100);
 
                                 timeoutId = setTimeout(() => {
-                                    clearInterval(intervalId);
-                                    
-                                    // Phase 7: CMD only for 300ms (releasing V)
-                                    console.log('Phase 7: CMD-only phase (releasing V)');
-                                    setCurrentState('CMD_ONLY_AFTER_V');
                                     setPressedKeys(['CMD_LEFT']);
-                                    setTimeRemaining(300);
-                                    setTotalDuration(300);
-
-                                    intervalId = setInterval(() => {
-                                        setTimeRemaining(prev => Math.max(0, prev - 10));
-                                    }, 10);
 
                                     timeoutId = setTimeout(() => {
-                                        clearInterval(intervalId);
-                                        
-                                        // Phase 8: No keys pressed for remaining 2.7 seconds
-                                        console.log('Phase 8: Pause phase after CMD+V');
-                                        setCurrentState('PAUSE_AFTER_V');
                                         setPressedKeys([]);
-                                        setTimeRemaining(2700);
-                                        setTotalDuration(2700);
-
-                                        intervalId = setInterval(() => {
-                                            setTimeRemaining(prev => Math.max(0, prev - 100));
-                                        }, 100);
 
                                         timeoutId = setTimeout(() => {
-                                            clearInterval(intervalId);
-                                            // Restart the sequence
-                                            console.log('Restarting sequence');
-                                            setTimeRemaining(0);
                                             setTimeout(startSequence, 500);
                                         }, 2700);
                                     }, 300);
@@ -529,12 +422,10 @@ export default function MacOSKeyboard() {
             }, 300);
         };
 
-        // Start the sequence after a brief initial delay
         timeoutId = setTimeout(startSequence, 1000);
 
         return () => {
             clearTimeout(timeoutId);
-            clearInterval(intervalId);
         };
     }, []);
 
@@ -556,21 +447,36 @@ export default function MacOSKeyboard() {
                     perspective: 1000px;
                 }
             `}</style>
-            <div className="flex flex-col items-center justify-center bg-black min-h-screen w-full p-10 perspective-1000 relative transition-all duration-1000">
-                {/* Title */}
-                <div className="mb-16 animate-fade-in-up">
-                    <h1 className="text-5xl font-light text-white text-center tracking-wide">
-                        As simple as{' '}
-                        <span className="bg-gradient-to-r from-[#8C5695] via-[#986AA1] to-[#A87BAD] bg-clip-text text-transparent font-extrabold">
-                            copy and paste
+            <div className="flex flex-col items-center justify-center w-full perspective-1000">
+                {/* About Us Focused Title */}
+                <div className="mb-16 max-w-4xl px-4 text-center">
+                    <h2 className="mb-4 text-5xl font-black text-white tracking-tight">
+                        Hosting Made{' '}
+                        <span className="bg-gradient-to-r from-[#8C5695] via-[#986AA1] to-[#A87BAD] bg-clip-text text-transparent">
+                            Simple
                         </span>
-                    </h1>
-                    <p className="mt-4 text-center text-xl text-white/60 max-w-2xl mx-auto">
-                        Deploy your infrastructure in seconds with our intuitive command-line interface. 
-                        No complex configurations, just simple commands.
+                    </h2>
+                    <p className="mb-6 text-xl text-white/70 leading-relaxed">
+                        At TOPAZ, we believe powerful technology shouldn't be complicated. 
+                        Our mission is to make enterprise-grade hosting as simple as copy and paste.
+                    </p>
+                    {/* <p className="text-lg text-white/60">
+                        Deploy servers, scale resources, and manage your infrastructure with intuitive commands. 
+                        No complex configurations, no steep learning curves—just straightforward hosting that works.
+                    </p> */}
+                </div>
+
+                {/* Keyboard Visual */}
+                <div className="p-10">
+                    <Keyboard pressedKeys={pressedKeys} />
+                </div>
+
+                {/* Bottom Tagline */}
+                <div className="mt-12 text-center">
+                    <p className="font-mono text-sm uppercase tracking-widest text-white/50">
+                        Simplicity • Speed • Reliability
                     </p>
                 </div>
-                <Keyboard pressedKeys={pressedKeys} />
             </div>
         </>
     );

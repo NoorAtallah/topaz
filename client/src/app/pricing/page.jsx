@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import {
   Server,
   Cpu,
@@ -19,14 +18,15 @@ import {
   Lock,
   Activity,
   Layers,
-  ArrowRight
+  ArrowRight,
+  Sparkles,
+  Star
 } from 'lucide-react';
 
 const PricingPage = () => {
-  const [activeCategory, setActiveCategory] = useState('all');
+  const [activeCategory, setActiveCategory] = useState('vps');
 
   const categories = [
-    { id: 'all', label: 'All Plans', icon: Layers },
     { id: 'vps', label: 'VPS Hosting', icon: Server },
     { id: 'resources', label: 'Resources', icon: Cpu },
     { id: 'software', label: 'Software', icon: Settings },
@@ -44,7 +44,7 @@ const PricingPage = () => {
       name: 'Standard VPS',
       price: 19.99,
       period: 'month',
-      description: 'Balanced resources, good for small businesses.',
+      description: 'Balanced resources, perfect for small businesses and personal projects.',
       icon: Server,
       color: '#8C5695',
       popular: false,
@@ -52,7 +52,9 @@ const PricingPage = () => {
         'Balanced CPU & RAM',
         'Standard SSD storage',
         'Perfect for small sites',
-        '24/7 support included'
+        '24/7 support included',
+        'Free SSL certificate',
+        '99.9% uptime guarantee'
       ]
     },
     {
@@ -61,15 +63,17 @@ const PricingPage = () => {
       name: 'Quasar VPS',
       price: 39.99,
       period: 'month',
-      description: 'More CPU/RAM for growing apps.',
+      description: 'Enhanced CPU/RAM for growing applications and medium traffic sites.',
       icon: Zap,
       color: '#986AA1',
       popular: true,
       features: [
         'Enhanced CPU power',
-        'Increased RAM',
-        'Growing applications',
-        'Priority support'
+        'Increased RAM capacity',
+        'Perfect for growing apps',
+        'Priority support',
+        'Free SSL certificate',
+        'Daily backups included'
       ]
     },
     {
@@ -78,15 +82,17 @@ const PricingPage = () => {
       name: 'Turbo VPS',
       price: 69.99,
       period: 'month',
-      description: 'High-speed, high-performance VPS.',
+      description: 'Maximum performance for high-traffic enterprise applications.',
       icon: Activity,
       color: '#A374AF',
       popular: false,
       features: [
         'Maximum performance',
         'High-speed processing',
-        'Enterprise-grade',
-        'VIP support'
+        'Enterprise-grade resources',
+        'VIP support 24/7',
+        'Advanced DDoS protection',
+        'Hourly backups'
       ]
     },
     {
@@ -95,15 +101,17 @@ const PricingPage = () => {
       name: 'Managed VPS',
       price: 20.00,
       period: 'month',
-      description: 'Expert management, updates, security etc.',
+      description: 'Expert management for your VPS - we handle everything.',
       icon: Settings,
       color: '#8C5695',
       popular: false,
       features: [
-        'Full management',
+        'Full server management',
         'Automatic updates',
         'Security monitoring',
-        'Expert support'
+        'Expert support team',
+        'Performance optimization',
+        'Incident response'
       ]
     },
 
@@ -111,59 +119,64 @@ const PricingPage = () => {
     {
       category: 'resources',
       id: 'ram',
-      name: 'RAM Options',
+      name: 'Additional RAM',
       price: 5,
-      period: 'GB',
-      description: '1 GB to 64 GB.',
+      period: 'per GB/month',
+      description: 'Scale from 1 GB to 64 GB based on your needs.',
       icon: Cpu,
       color: '#986AA1',
-      isAddon: true
+      isAddon: true,
+      features: ['Instant provisioning', 'Flexible scaling', 'No downtime', 'Pay as you grow']
     },
     {
       category: 'resources',
       id: 'ssd',
       name: 'SSD Storage',
       price: 10,
-      period: '100GB',
-      description: 'Faster storage.',
+      period: 'per 100GB/month',
+      description: 'Fast and reliable SSD storage for your data.',
       icon: HardDrive,
       color: '#8C5695',
-      isAddon: true
+      isAddon: true,
+      features: ['High-speed SSD', 'Reliable storage', 'Automatic backups', 'Easy expansion']
     },
     {
       category: 'resources',
       id: 'nvme',
       name: 'NVMe Upgrade',
       price: '+25%',
-      period: 'on storage',
-      description: 'Faster storage (on SSD price).',
+      period: 'on storage cost',
+      description: 'Ultra-fast NVMe storage for maximum performance.',
       icon: Zap,
       color: '#A374AF',
-      isAddon: true
+      isAddon: true,
+      features: ['10x faster than SSD', 'Lower latency', 'Better IOPS', 'Premium performance']
     },
     {
       category: 'resources',
       id: 'dedicated-ip',
       name: 'Dedicated IP',
       price: 3,
-      period: 'IP/month',
-      description: 'Unique IP address.',
+      period: 'per IP/month',
+      description: 'Get your own unique IP address.',
       icon: Network,
       color: '#986AA1',
-      isAddon: true
+      isAddon: true,
+      features: ['Unique IP address', 'Better SEO', 'SSL compatibility', 'Email deliverability']
     },
 
     // Software & Control Panels
     {
       category: 'software',
       id: 'cpanel',
-      name: 'cPanel / WHM',
+      name: 'cPanel/WHM',
       price: 15,
       period: 'month',
-      description: 'Most popular Linux panel.',
+      description: 'Industry-leading Linux control panel.',
       icon: Settings,
       color: '#8C5695',
-      isAddon: true
+      isAddon: true,
+      features: ['Easy to use', 'Linux compatible', 'Full WHM access', 'Regular updates']
     },
     {
       category: 'software',
@@ -171,10 +184,11 @@ const PricingPage = () => {
       name: 'Plesk Panel',
       price: 12,
       period: 'month',
-      description: 'For Linux and Windows.',
+      description: 'Versatile panel for Linux and Windows.',
       icon: Settings,
       color: '#986AA1',
-      isAddon: true
+      isAddon: true,
+      features: ['Linux & Windows', 'User-friendly', 'WordPress toolkit', 'Multi-server']
     },
     {
       category: 'software',
@@ -182,34 +196,49 @@ const PricingPage = () => {
       name: 'Interworx Panel',
       price: 10,
       period: 'month',
-      description: 'Lightweight panel for advanced use.',
+      description: 'Lightweight panel for advanced users.',
       icon: Settings,
       color: '#A374AF',
-      isAddon: true
+      isAddon: true,
+      features: ['Lightweight', 'Advanced features', 'API access', 'Cost-effective']
+    },
+    {
+      category: 'software',
+      id: 'softaculous',
+      name: 'Softaculous',
+      price: 'Included',
+      period: '',
+      description: '400+ apps ready to install instantly.',
+      icon: Layers,
+      color: '#8C5695',
+      isAddon: true,
+      features: ['400+ applications', 'One-click install', 'Auto-updates', 'Free with panels']
     },
 
     // Security Add-ons
     {
       category: 'security',
       id: 'ssl',
-      name: 'Free SSL',
+      name: 'Premium SSL',
       price: 3.99,
       period: 'month',
-      description: 'HTTPS for websites.',
+      description: 'Secure your website with HTTPS.',
       icon: Lock,
       color: '#8C5695',
-      isAddon: true
+      isAddon: true,
+      features: ['HTTPS encryption', 'Browser trust', 'SEO benefits', 'Customer confidence']
     },
     {
       category: 'security',
       id: 'firewall',
-      name: 'Firewall Configuration',
+      name: 'Advanced Firewall',
       price: 5.99,
       period: 'month',
-      description: 'Custom traffic rules.',
+      description: 'Custom firewall rules and traffic filtering.',
       icon: Shield,
       color: '#986AA1',
-      isAddon: true
+      isAddon: true,
+      features: ['Custom rules', 'Traffic filtering', 'Intrusion detection', 'Real-time monitoring']
     },
     {
       category: 'security',
@@ -217,10 +246,11 @@ const PricingPage = () => {
       name: 'Malware Scanning',
       price: 8,
       period: 'month',
-      description: 'CXS / ImunifyAV',
+      description: 'CXS and ImunifyAV protection.',
       icon: Shield,
       color: '#A374AF',
-      isAddon: true
+      isAddon: true,
+      features: ['Daily scans', 'Auto-removal', 'Real-time protection', 'Quarantine system']
     },
     {
       category: 'security',
@@ -228,10 +258,11 @@ const PricingPage = () => {
       name: 'DDoS Protection',
       price: 5.99,
       period: 'month',
-      description: 'Real-time defense (Turbo only).',
+      description: 'Enterprise-grade DDoS mitigation.',
       icon: Shield,
       color: '#8C5695',
-      isAddon: true
+      isAddon: true,
+      features: ['Real-time defense', 'Traffic filtering', 'Always-on protection', 'Attack reports']
     },
 
     // Backups & Storage
@@ -241,32 +272,35 @@ const PricingPage = () => {
       name: 'Automated Backups',
       price: 7,
       period: 'month',
-      description: 'Daily backups.',
+      description: 'Daily automated backups of your data.',
       icon: Database,
       color: '#986AA1',
-      isAddon: true
+      isAddon: true,
+      features: ['Daily backups', 'Auto-scheduling', '30-day retention', 'One-click restore']
     },
     {
       category: 'backups',
       id: 'snapshots',
       name: 'On-Demand Snapshots',
       price: 1.99,
-      period: 'month',
-      description: 'Manual restore points.',
+      period: 'per snapshot',
+      description: 'Manual restore points before changes.',
       icon: Database,
       color: '#8C5695',
-      isAddon: true
+      isAddon: true,
+      features: ['Instant snapshots', 'Pre-update safety', 'Quick restore', 'Unlimited storage']
     },
     {
       category: 'backups',
       id: 'extra-backup',
       name: 'Extra Backup Storage',
       price: 5,
-      period: '100GB',
-      description: 'More backup space.',
+      period: 'per 100GB/month',
+      description: 'Additional storage for your backups.',
       icon: Database,
       color: '#A374AF',
-      isAddon: true
+      isAddon: true,
+      features: ['Extended storage', 'Long-term retention', 'Secure storage', 'Easy access']
     },
 
     // Cloud Features
@@ -276,10 +310,11 @@ const PricingPage = () => {
       name: 'Cloud VPS',
       price: 29.99,
       period: 'month',
-      description: 'Elastic & scalable VPS.',
+      description: 'Elastic and scalable cloud infrastructure.',
       icon: Cloud,
       color: '#8C5695',
-      isAddon: true
+      isAddon: true,
+      features: ['Auto-scaling', 'Elastic resources', 'High availability', 'Pay as you grow']
     },
     {
       category: 'cloud',
@@ -287,11 +322,12 @@ const PricingPage = () => {
       name: 'Load Balancing',
       price: 'Custom',
       period: 'pricing',
-      description: 'Distribute traffic.',
+      description: 'Distribute traffic across multiple servers.',
       icon: Activity,
       color: '#986AA1',
       isAddon: true,
-      isCustom: true
+      isCustom: true,
+      features: ['Traffic distribution', 'High availability', 'Auto-failover', 'Health monitoring']
     },
     {
       category: 'cloud',
@@ -299,11 +335,12 @@ const PricingPage = () => {
       name: 'High Availability',
       price: 'Custom',
       period: 'pricing',
-      description: 'Clustering for uptime-critical systems.',
+      description: 'Clustering for mission-critical systems.',
       icon: Layers,
       color: '#A374AF',
       isAddon: true,
-      isCustom: true
+      isCustom: true,
+      features: ['99.99% uptime', 'Automatic failover', 'Redundant systems', 'Zero downtime']
     },
 
     // Billing & Licensing
@@ -313,10 +350,11 @@ const PricingPage = () => {
       name: 'WHMCS Integration',
       price: 14.99,
       period: 'month',
-      description: 'Billing, provisioning, support system.',
+      description: 'Complete billing and support system.',
       icon: CreditCard,
       color: '#8C5695',
-      isAddon: true
+      isAddon: true,
+      features: ['Auto-billing', 'Client portal', 'Support tickets', 'Provisioning']
     },
     {
       category: 'billing',
@@ -324,93 +362,60 @@ const PricingPage = () => {
       name: 'License Add-ons',
       price: 'Discounted',
       period: '',
-      description: 'Buy panels/licenses via host.',
+      description: 'Get discounted software licenses.',
       icon: CreditCard,
       color: '#986AA1',
       isAddon: true,
-      isCustom: true
+      isCustom: true,
+      features: ['Bulk discounts', 'Easy management', 'Auto-renewal', 'Support included']
     },
     {
       category: 'billing',
       id: 'domain-bundle',
-      name: 'Domain + VPS Bundle',
+      name: 'Domain Bundle',
       price: 10.99,
-      period: 'month',
-      description: 'Add domain with hosting.',
+      period: 'year',
+      description: 'Add domain registration with hosting.',
       icon: Globe,
       color: '#A374AF',
-      isAddon: true
+      isAddon: true,
+      features: ['Free domain privacy', 'Easy management', 'Auto-renewal', 'DNS management']
     }
   ];
 
-  const filteredPlans = activeCategory === 'all' 
-    ? plans 
-    : plans.filter(plan => plan.category === activeCategory);
+  const filteredPlans = plans.filter(plan => plan.category === activeCategory);
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-black">
-      {/* Background Effects */}
-      <div className="fixed inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0a0514] to-black" />
-        
-        <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.15, 0.25, 0.15],
-          }}
-          transition={{ duration: 15, repeat: Infinity }}
-          className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-[#8C5695] blur-[120px]"
-        />
-        <motion.div
-          animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.15, 0.25, 0.15],
-          }}
-          transition={{ duration: 18, repeat: Infinity }}
-          className="absolute right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-[#986AA1] blur-[120px]"
-        />
+    <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-white via-purple-50/20 to-white">
+      {/* Background */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-[#8C5695] opacity-5 blur-[120px]" />
+        <div className="absolute right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-[#986AA1] opacity-5 blur-[120px]" />
       </div>
 
-      {/* Grid Pattern */}
-      <div className="pointer-events-none fixed inset-0 opacity-[0.03]">
-        <div className="h-full w-full bg-[linear-gradient(rgba(140,86,149,0.5)_1px,transparent_1px),linear-gradient(90deg,rgba(140,86,149,0.5)_1px,transparent_1px)] bg-[size:50px_50px]" />
-      </div>
+      {/* Hero */}
+      <HeroSection />
 
-      {/* Content */}
-      <div className="relative">
-        {/* Hero Section */}
-        <HeroSection />
+      {/* Category Tabs */}
+      <CategoryTabs 
+        categories={categories}
+        activeCategory={activeCategory}
+        setActiveCategory={setActiveCategory}
+      />
 
-        {/* Category Filter */}
-        <CategoryFilter 
-          categories={categories}
-          activeCategory={activeCategory}
-          setActiveCategory={setActiveCategory}
-        />
-
-        {/* Pricing Grid */}
-        <section className="relative px-4 py-16 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-7xl">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeCategory}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-                className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-              >
-                {filteredPlans.map((plan, index) => (
-                  <PricingCard key={plan.id} plan={plan} index={index} />
-                ))}
-              </motion.div>
-            </AnimatePresence>
+      {/* Pricing Grid */}
+      <section className="relative px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {filteredPlans.map((plan, index) => (
+              <PricingCard key={plan.id} plan={plan} index={index} />
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Bottom CTA */}
-        <BottomCTA />
-      </div>
+      {/* CTA */}
+      <BottomCTA />
     </div>
   );
 };
@@ -419,96 +424,69 @@ const HeroSection = () => {
   return (
     <section className="relative px-4 py-32 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#8C5695]/40 bg-[#8C5695]/5 px-6 py-2 backdrop-blur-sm"
-          >
-            <div className="h-2 w-2 rounded-full bg-[#8C5695] animate-pulse" />
-            <span className="font-mono text-sm font-medium tracking-wider text-white/90">
-              YOUR JOURNEY BEGINS NOW
-            </span>
-          </motion.div>
+        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#8C5695]/20 bg-white px-6 py-2 shadow-sm">
+          <Sparkles className="h-4 w-4 text-[#8C5695]" />
+          <span className="font-mono text-sm font-medium tracking-wider text-[#8C5695]">
+            FLEXIBLE PRICING
+          </span>
+        </div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="mb-6 text-5xl font-black uppercase tracking-tight text-white sm:text-6xl md:text-7xl"
-          >
-            Explore Our{' '}
-            <span className="bg-gradient-to-r from-[#8C5695] to-[#986AA1] bg-clip-text text-transparent">
-              Pricing Plans!
-            </span>
-          </motion.h1>
+        <h1 className="mb-6 text-5xl font-black uppercase tracking-tight text-gray-900 sm:text-6xl md:text-7xl">
+          Choose Your{' '}
+          <span className="bg-gradient-to-r from-[#8C5695] to-[#986AA1] bg-clip-text text-transparent">
+            Perfect Plan
+          </span>
+        </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="mx-auto mb-8 max-w-2xl text-xl text-white/70"
-          >
-            Find the perfect VPS hosting solution tailored to your needs
-          </motion.p>
-        </motion.div>
+        <p className="mx-auto mb-12 max-w-3xl text-xl leading-relaxed text-gray-600">
+          From VPS hosting to add-ons, find everything you need to power your online presence
+        </p>
+
+        <div className="flex flex-wrap items-center justify-center gap-6">
+          <div className="flex items-center gap-2 rounded-full border border-[#8C5695]/20 bg-white px-4 py-2 shadow-sm">
+            <Zap className="h-4 w-4 text-[#8C5695]" />
+            <span className="font-mono text-sm font-semibold text-gray-900">99.9% Uptime</span>
+          </div>
+          <div className="flex items-center gap-2 rounded-full border border-[#8C5695]/20 bg-white px-4 py-2 shadow-sm">
+            <Shield className="h-4 w-4 text-[#8C5695]" />
+            <span className="font-mono text-sm font-semibold text-gray-900">Secure</span>
+          </div>
+          <div className="flex items-center gap-2 rounded-full border border-[#8C5695]/20 bg-white px-4 py-2 shadow-sm">
+            <Star className="h-4 w-4 text-[#8C5695]" />
+            <span className="font-mono text-sm font-semibold text-gray-900">24/7 Support</span>
+          </div>
+        </div>
       </div>
     </section>
   );
 };
 
-const CategoryFilter = ({ categories, activeCategory, setActiveCategory }) => {
+const CategoryTabs = ({ categories, activeCategory, setActiveCategory }) => {
   return (
     <section className="relative px-4 py-8 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <div className="flex flex-wrap justify-center gap-3">
-          {categories.map((category, index) => {
-            const Icon = category.icon;
-            const isActive = activeCategory === category.id;
-            
-            return (
-              <motion.button
-                key={category.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setActiveCategory(category.id)}
-                className="group relative"
-              >
-                {isActive && (
-                  <motion.div
-                    layoutId="activeCategory"
-                    className="absolute inset-0 rounded-xl bg-gradient-to-r from-[#8C5695] to-[#986AA1]"
-                    transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
-                  />
-                )}
-                
-                <div
-                  className={`relative flex items-center gap-2 rounded-xl border px-4 py-2 backdrop-blur-sm transition-colors ${
+        <div className="overflow-x-auto">
+          <div className="inline-flex min-w-full justify-center gap-2 rounded-2xl border border-[#8C5695]/20 bg-white p-2 shadow-lg">
+            {categories.map((category) => {
+              const Icon = category.icon;
+              const isActive = activeCategory === category.id;
+              
+              return (
+                <button
+                  key={category.id}
+                  onClick={() => setActiveCategory(category.id)}
+                  className={`flex items-center gap-2 whitespace-nowrap rounded-xl px-4 py-3 font-mono text-sm font-bold transition-all ${
                     isActive
-                      ? 'border-transparent'
-                      : 'border-[#8C5695]/30 bg-white/5 hover:border-[#8C5695] hover:bg-[#8C5695]/10'
+                      ? 'bg-gradient-to-r from-[#8C5695] to-[#986AA1] text-white shadow-lg'
+                      : 'text-gray-600 hover:bg-gray-50'
                   }`}
                 >
-                  <Icon className={`h-4 w-4 ${isActive ? 'text-white' : 'text-[#8C5695]'}`} />
-                  <span
-                    className={`font-mono text-sm font-semibold ${
-                      isActive ? 'text-white' : 'text-white/70'
-                    }`}
-                  >
-                    {category.label}
-                  </span>
-                </div>
-              </motion.button>
-            );
-          })}
+                  <Icon className="h-4 w-4" />
+                  {category.label}
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
@@ -519,164 +497,101 @@ const PricingCard = ({ plan, index }) => {
   const Icon = plan.icon;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.4, delay: index * 0.03 }}
-      className="group relative"
-    >
+    <div className="group relative h-full transition-transform hover:-translate-y-2">
       {plan.popular && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="absolute -top-3 left-1/2 z-20 -translate-x-1/2"
-        >
-          <div className="relative">
-            <div className="absolute inset-0 animate-pulse rounded-full bg-[#8C5695] blur-md" />
-            <div className="relative flex items-center gap-2 rounded-full border border-[#8C5695] bg-black px-3 py-1">
-              <Zap className="h-3 w-3 text-[#8C5695]" fill="currentColor" />
-              <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#8C5695]">
-                Popular
-              </span>
-            </div>
-          </div>
-        </motion.div>
-      )}
-
-      <motion.div
-        whileHover={{ y: -8, scale: plan.popular ? 1.03 : 1.02 }}
-        transition={{ duration: 0.3 }}
-        className="relative h-full"
-      >
-        <div
-          className="absolute -inset-1 rounded-2xl opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100"
-          style={{ background: `linear-gradient(135deg, ${plan.color}, transparent)` }}
-        />
-
-        <div className="relative h-full overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-black/90 to-black/70 backdrop-blur-xl">
-          <div className="absolute right-0 top-0 h-24 w-24 opacity-20">
-            <div
-              className="absolute inset-0 rounded-bl-full"
-              style={{ background: `radial-gradient(circle at top right, ${plan.color}, transparent)` }}
-            />
-          </div>
-
-          <div className="relative p-6">
-            <div className="mb-4 inline-flex">
-              <div className="relative">
-                <div
-                  className="absolute inset-0 rounded-lg opacity-40 blur-lg"
-                  style={{ backgroundColor: plan.color }}
-                />
-                <div
-                  className="relative flex h-12 w-12 items-center justify-center rounded-lg border"
-                  style={{
-                    borderColor: `${plan.color}40`,
-                    background: `linear-gradient(135deg, ${plan.color}20, ${plan.color}10)`,
-                  }}
-                >
-                  <Icon className="h-6 w-6" style={{ color: plan.color }} strokeWidth={2} />
-                </div>
-              </div>
-            </div>
-
-            <h3 className="mb-2 text-xl font-bold text-white">{plan.name}</h3>
-
-            <div className="mb-3 flex items-baseline gap-1">
-              <span className="text-3xl font-black text-white">
-                {typeof plan.price === 'number' ? `$${plan.price}` : plan.price}
-              </span>
-              <span className="text-sm text-white/40">
-                {plan.period && `/ ${plan.period}`}
-              </span>
-            </div>
-
-            <p className="mb-4 text-sm text-white/60">{plan.description}</p>
-
-            {plan.features && (
-              <div className="mb-4 space-y-2">
-                {plan.features.map((feature, i) => (
-                  <div key={i} className="flex items-center gap-2">
-                    <Check
-                      className="h-4 w-4 flex-shrink-0"
-                      style={{ color: plan.color }}
-                    />
-                    <span className="text-xs text-white/70">{feature}</span>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="group/btn relative w-full overflow-hidden rounded-lg py-3 font-mono text-sm font-bold uppercase tracking-wider"
-            >
-              <div
-                className="absolute inset-0"
-                style={{
-                  background: `linear-gradient(135deg, ${plan.color}40, ${plan.color}20)`,
-                }}
-              />
-              <div
-                className="absolute inset-0 rounded-lg border"
-                style={{ borderColor: `${plan.color}40` }}
-              />
-
-              <span
-                className="relative flex items-center justify-center gap-2"
-                style={{ color: plan.color }}
-              >
-                {plan.isCustom ? 'Contact Us' : plan.isAddon ? 'Add to Plan' : 'Get Started'}
-                <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
-              </span>
-            </motion.button>
+        <div className="absolute -top-4 left-1/2 z-10 -translate-x-1/2">
+          <div className="flex items-center gap-2 rounded-full border-2 border-[#8C5695] bg-white px-4 py-1 shadow-lg">
+            <Star className="h-3 w-3 text-[#8C5695]" fill="currentColor" />
+            <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#8C5695]">
+              Popular
+            </span>
           </div>
         </div>
-      </motion.div>
-    </motion.div>
+      )}
+
+      <div className="absolute -inset-1 rounded-3xl opacity-0 blur-xl transition-opacity group-hover:opacity-30" style={{ background: plan.color }} />
+
+      <div className="relative h-full overflow-hidden rounded-3xl border border-[#8C5695]/20 bg-white shadow-xl">
+        <div className="absolute right-0 top-0 h-32 w-32 opacity-10">
+          <div className="absolute inset-0 rounded-bl-full" style={{ background: `radial-gradient(circle at top right, ${plan.color}, transparent)` }} />
+        </div>
+
+        <div className="relative p-6">
+          <div className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-xl" style={{ background: `${plan.color}15` }}>
+            <Icon className="h-7 w-7" style={{ color: plan.color }} strokeWidth={2} />
+          </div>
+
+          <h3 className="mb-2 text-xl font-black text-gray-900">{plan.name}</h3>
+
+          <div className="mb-3 flex items-baseline gap-1">
+            <span className="text-3xl font-black text-gray-900">
+              {typeof plan.price === 'number' ? `$${plan.price}` : plan.price}
+            </span>
+            {plan.period && (
+              <span className="text-sm text-gray-500">/ {plan.period}</span>
+            )}
+          </div>
+
+          <p className="mb-4 text-sm leading-relaxed text-gray-600">{plan.description}</p>
+
+          {plan.features && (
+            <div className="mb-6 space-y-2">
+              {plan.features.map((feature, i) => (
+                <div key={i} className="flex items-center gap-2">
+                  <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full" style={{ background: `${plan.color}20` }}>
+                    <Check className="h-3 w-3" style={{ color: plan.color }} strokeWidth={3} />
+                  </div>
+                  <span className="text-xs text-gray-700">{feature}</span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <button
+            className="w-full rounded-xl py-3 font-bold text-white transition-all hover:scale-105 hover:shadow-lg"
+            style={{ background: plan.color }}
+          >
+            <span className="flex items-center justify-center gap-2">
+              {plan.isCustom ? 'Contact Us' : plan.isAddon ? 'Add to Plan' : 'Get Started'}
+              <ArrowRight className="h-4 w-4" />
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
   );
 };
 
 const BottomCTA = () => {
   return (
     <section className="relative px-4 py-24 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-4xl text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <h2 className="mb-6 text-4xl font-black uppercase tracking-tight text-white sm:text-5xl">
-            Need a{' '}
-            <span className="bg-gradient-to-r from-[#8C5695] to-[#986AA1] bg-clip-text text-transparent">
-              Custom Solution?
-            </span>
-          </h2>
+      <div className="mx-auto max-w-4xl">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-gray-900 to-gray-800 p-12 text-center shadow-2xl md:p-16">
+          <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[#8C5695] opacity-20 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-[#986AA1] opacity-20 blur-3xl" />
 
-          <p className="mx-auto mb-10 max-w-2xl text-lg text-white/70">
-            Contact our sales team to build a plan tailored specifically for your requirements
-          </p>
+          <div className="relative z-10">
+            <h2 className="mb-6 text-4xl font-black text-white sm:text-5xl">
+              Need a{' '}
+              <span className="bg-gradient-to-r from-[#8C5695] to-[#986AA1] bg-clip-text text-transparent">
+                Custom Solution?
+              </span>
+            </h2>
 
-          <motion.a
-            href="#"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="group relative inline-flex overflow-hidden rounded-xl px-8 py-4 font-mono text-sm font-bold uppercase tracking-wider"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-[#8C5695] to-[#986AA1]" />
-            <motion.div
-              className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform group-hover:translate-x-full"
-              transition={{ duration: 0.6 }}
-            />
-            <span className="relative flex items-center gap-2 text-white">
-              Contact Sales Team
-              <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </span>
-          </motion.a>
-        </motion.div>
+            <p className="mx-auto mb-10 max-w-2xl text-lg text-white/80">
+              Contact our sales team for a tailored plan that fits your specific requirements
+            </p>
+
+            <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <a href="#" className="rounded-xl bg-white px-8 py-4 font-bold text-gray-900 transition-all hover:scale-105">
+                Contact Sales
+              </a>
+              <a href="#" className="rounded-xl border-2 border-white/30 bg-white/10 px-8 py-4 font-bold text-white backdrop-blur-sm transition-all hover:bg-white/20">
+                View All Plans
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
