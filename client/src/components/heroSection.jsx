@@ -3,9 +3,10 @@
 import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+
 const HeroSection = () => {
   return (
-    <div className="relative h-screen overflow-hidden bg-gradient-to-br from-white via-purple-50/30 to-white">
+    <div className="relative min-h-screen h-screen overflow-hidden bg-gradient-to-br from-white via-purple-50/30 to-white">
       {/* Background Paths Animation */}
       <BackgroundPaths />
       
@@ -32,30 +33,30 @@ const HeroSection = () => {
       {/* Animated Border Lines */}
       <AnimatedBorders />
 
-      {/* Main Content - No parallax animation */}
-      <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center">
+      {/* Main Content - Responsive */}
+      <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 sm:px-6 md:px-8 lg:px-12 text-center py-20 sm:py-0">
         {/* Status Badge */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.5 }}
-          className="mb-4"
+          className="mb-3 sm:mb-4 md:mb-6"
         >
-          <div className="inline-flex items-center gap-3 rounded-full border border-[#8C5695]/40 bg-[#8C5695]/5 px-6 py-2 backdrop-blur-md">
-            <div className="h-2 w-2 rounded-full bg-[#8C5695] animate-pulse" />
-            <span className="font-mono text-sm font-medium tracking-wider text-[#8C5695]">
+          <div className="inline-flex items-center gap-2 sm:gap-3 rounded-full border border-[#8C5695]/40 bg-[#8C5695]/5 px-4 py-1.5 sm:px-6 sm:py-2 backdrop-blur-md mt-20">
+            <div className="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-[#8C5695] animate-pulse" />
+            <span className="font-mono text-[10px] xs:text-xs sm:text-sm font-medium tracking-wider text-[#8C5695]">
               NEXT-GEN INFRASTRUCTURE
             </span>
           </div>
         </motion.div>
 
         {/* Main Heading with Enhanced Effects */}
-        <div className="relative mb-6">
+        <div className="relative mb-4 sm:mb-6 md:mb-8">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
-            className="relative text-6xl font-black uppercase tracking-tight sm:text-7xl md:text-8xl lg:text-9xl"
+            className="relative text-5xl xs:text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tight leading-none"
           >
             <span className="relative inline-block group">
               {/* Main text with gradient */}
@@ -68,7 +69,7 @@ const HeroSection = () => {
               </span>
               {/* Animated underline on hover */}
               <motion.span 
-                className="absolute -bottom-2 left-0 h-1 w-0 bg-gradient-to-r from-[#8C5695] to-[#986AA1] group-hover:w-full transition-all duration-500"
+                className="absolute -bottom-2 left-0 h-0.5 sm:h-1 w-0 bg-gradient-to-r from-[#8C5695] to-[#986AA1] group-hover:w-full transition-all duration-500"
               />
             </span>
           </motion.h1>
@@ -77,7 +78,7 @@ const HeroSection = () => {
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
             transition={{ duration: 1, delay: 1.2 }}
-            className="mx-auto mt-6 h-1 w-64 origin-center bg-gradient-to-r from-transparent via-[#8C5695] to-transparent relative overflow-hidden"
+            className="mx-auto mt-4 sm:mt-6 h-0.5 sm:h-1 w-32 sm:w-48 md:w-64 origin-center bg-gradient-to-r from-transparent via-[#8C5695] to-transparent relative overflow-hidden"
           >
             <motion.div
               animate={{ x: ['-100%', '100%'] }}
@@ -92,58 +93,57 @@ const HeroSection = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 1.4 }}
-          className="mb-12 max-w-3xl"
+          className="mb-8 sm:mb-10 md:mb-12 max-w-3xl px-4"
         >
-          <p className="font-mono text-xl font-semibold text-gray-800 md:text-2xl leading-relaxed">
+          <p className="font-mono text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-gray-800 leading-relaxed">
             Powerful VPS Hosting & Professional Server Solutions
           </p>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 2 }}
-            className="mt-4 text-base text-gray-600 md:text-lg max-w-2xl mx-auto leading-relaxed"
+            className="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed"
           >
             Enterprise-grade infrastructure built for developers, businesses, and innovators
           </motion.p>
           
           {/* Decorative dots */}
-          <div className="flex items-center justify-center gap-2 mt-6">
+          <div className="flex items-center justify-center gap-1.5 sm:gap-2 mt-4 sm:mt-6">
             <motion.div 
               animate={{ scale: [1, 1.2, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
-              className="h-1.5 w-1.5 rounded-full bg-[#8C5695]"
+              className="h-1 w-1 sm:h-1.5 sm:w-1.5 rounded-full bg-[#8C5695]"
             />
             <motion.div 
               animate={{ scale: [1, 1.2, 1] }}
               transition={{ duration: 2, repeat: Infinity, delay: 0.2 }}
-              className="h-1.5 w-1.5 rounded-full bg-[#986AA1]"
+              className="h-1 w-1 sm:h-1.5 sm:w-1.5 rounded-full bg-[#986AA1]"
             />
             <motion.div 
               animate={{ scale: [1, 1.2, 1] }}
               transition={{ duration: 2, repeat: Infinity, delay: 0.4 }}
-              className="h-1.5 w-1.5 rounded-full bg-[#8C5695]"
+              className="h-1 w-1 sm:h-1.5 sm:w-1.5 rounded-full bg-[#8C5695]"
             />
           </div>
         </motion.div>
 
         {/* CTA Buttons */}
-       
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 2.2 }}
-          className="flex flex-col gap-4 sm:flex-row cursor-pointer"
+          className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto px-4 sm:px-0"
         >
-           <Link href="/pricing" passHref> 
-          <HolographicButton primary>
-            LAUNCH PROJECT
-          </HolographicButton>
+          <Link href="/pricing" passHref className="w-full sm:w-auto"> 
+            <HolographicButton primary>
+              LAUNCH PROJECT
+            </HolographicButton>
           </Link>
-          <Link href="/services" passHref> 
-          <HolographicButton>
-            EXPLORE SERVICES
-          </HolographicButton>
-           </Link>
+          <Link href="/services" passHref className="w-full sm:w-auto"> 
+            <HolographicButton>
+              EXPLORE SERVICES
+            </HolographicButton>
+          </Link>
         </motion.div>
 
         {/* Tech Stats */}
@@ -151,7 +151,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 2.4 }}
-          className="mt-16 grid grid-cols-3 gap-8 md:gap-16"
+          className="mt-10 sm:mt-12 md:mt-16 grid grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-16 w-full max-w-2xl"
         >
           <TechStat value="99.9%" label="UPTIME" />
           <TechStat value="24/7" label="SUPPORT" />
@@ -163,7 +163,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 2.8 }}
-          className="mt-12 flex items-center justify-center gap-6"
+          className="mt-8 sm:mt-10 md:mt-12 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 md:gap-6"
         >
           <SystemStatus label="API" />
           <SystemStatus label="DATABASE" />
@@ -241,7 +241,7 @@ const HolographicButton = ({ children, primary }) => {
     <motion.button
       whileHover={{ scale: 1.05, y: -2 }}
       whileTap={{ scale: 0.95 }}
-      className="group relative overflow-hidden rounded-xl px-8 py-4 font-mono text-sm font-bold tracking-wider shadow-lg"
+      className="group relative overflow-hidden rounded-xl px-6 py-3 sm:px-8 sm:py-4 font-mono text-xs sm:text-sm font-bold tracking-wider shadow-lg w-full sm:w-auto"
     >
       {primary ? (
         <>
@@ -259,7 +259,7 @@ const HolographicButton = ({ children, primary }) => {
           <div className="absolute inset-0 bg-gradient-to-r from-[#8C5695]/0 via-[#8C5695]/10 to-[#8C5695]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </>
       )}
-      <span className={`relative z-10 flex items-center gap-2 ${primary ? 'text-white' : 'text-[#8C5695]'}`}>
+      <span className={`relative z-10 flex items-center justify-center gap-2 ${primary ? 'text-white' : 'text-[#8C5695]'}`}>
         {children}
         <motion.span
           animate={{ x: [0, 4, 0] }}
@@ -274,7 +274,7 @@ const HolographicButton = ({ children, primary }) => {
   );
 };
 
-// Simplified Tech Stat
+// Responsive Tech Stat
 const TechStat = ({ value, label }) => {
   return (
     <motion.div
@@ -283,13 +283,13 @@ const TechStat = ({ value, label }) => {
       transition={{ duration: 0.5, type: 'spring' }}
       className="relative"
     >
-      <div className="font-mono text-3xl font-bold text-[#8C5695] md:text-4xl">
+      <div className="font-mono text-2xl sm:text-3xl md:text-4xl font-bold text-[#8C5695]">
         {value}
       </div>
-      <div className="mt-1 font-mono text-xs tracking-widest text-[#986AA1]">
+      <div className="mt-1 font-mono text-[10px] sm:text-xs tracking-widest text-[#986AA1]">
         {label}
       </div>
-      <div className="mx-auto mt-3 h-1 w-20 overflow-hidden rounded-full bg-gray-200">
+      <div className="mx-auto mt-2 sm:mt-3 h-0.5 sm:h-1 w-12 sm:w-16 md:w-20 overflow-hidden rounded-full bg-gray-200">
         <motion.div
           initial={{ x: '-100%' }}
           animate={{ x: '0%' }}
@@ -301,22 +301,22 @@ const TechStat = ({ value, label }) => {
   );
 };
 
-// Simplified System Status
+// Responsive System Status
 const SystemStatus = ({ label }) => {
   return (
-    <div className="flex items-center gap-2">
-      <div className="h-2 w-2 rounded-full bg-[#8C5695] animate-pulse" />
-      <span className="font-mono text-xs tracking-wider text-gray-600">
+    <div className="flex items-center gap-1.5 sm:gap-2">
+      <div className="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-[#8C5695] animate-pulse" />
+      <span className="font-mono text-[10px] sm:text-xs tracking-wider text-gray-600">
         {label}
       </span>
-      <span className="font-mono text-xs font-bold tracking-wider text-[#8C5695]">
+      <span className="font-mono text-[10px] sm:text-xs font-bold tracking-wider text-[#8C5695]">
         [ONLINE]
       </span>
     </div>
   );
 };
 
-// Simplified Corner Decorations (static)
+// Responsive Corner Decorations (static)
 const CornerDecorations = () => {
   return (
     <>
@@ -325,12 +325,12 @@ const CornerDecorations = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
-        className="absolute left-8 top-8"
+        className="absolute left-4 sm:left-6 md:left-8 top-4 sm:top-6 md:top-8"
       >
-        <div className="relative h-16 w-16">
+        <div className="relative h-10 w-10 sm:h-12 sm:w-12 md:h-16 md:w-16">
           <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-[#8C5695] to-transparent" />
           <div className="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-[#8C5695] to-transparent" />
-          <div className="absolute left-0 top-0 h-2 w-2 rounded-full bg-[#8C5695]" />
+          <div className="absolute left-0 top-0 h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-[#8C5695]" />
         </div>
       </motion.div>
 
@@ -339,12 +339,12 @@ const CornerDecorations = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
-        className="absolute right-8 top-8"
+        className="absolute right-4 sm:right-6 md:right-8 top-4 sm:top-6 md:top-8"
       >
-        <div className="relative h-16 w-16">
+        <div className="relative h-10 w-10 sm:h-12 sm:w-12 md:h-16 md:w-16">
           <div className="absolute right-0 top-0 h-px w-full bg-gradient-to-l from-[#986AA1] to-transparent" />
           <div className="absolute right-0 top-0 h-full w-px bg-gradient-to-b from-[#986AA1] to-transparent" />
-          <div className="absolute right-0 top-0 h-2 w-2 rounded-full bg-[#986AA1]" />
+          <div className="absolute right-0 top-0 h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-[#986AA1]" />
         </div>
       </motion.div>
 
@@ -353,12 +353,12 @@ const CornerDecorations = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
-        className="absolute bottom-8 left-8"
+        className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-4 sm:left-6 md:left-8"
       >
-        <div className="relative h-16 w-16">
+        <div className="relative h-10 w-10 sm:h-12 sm:w-12 md:h-16 md:w-16">
           <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-[#986AA1] to-transparent" />
           <div className="absolute bottom-0 left-0 h-full w-px bg-gradient-to-t from-[#986AA1] to-transparent" />
-          <div className="absolute bottom-0 left-0 h-2 w-2 rounded-full bg-[#986AA1]" />
+          <div className="absolute bottom-0 left-0 h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-[#986AA1]" />
         </div>
       </motion.div>
 
@@ -367,38 +367,37 @@ const CornerDecorations = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
-        className="absolute bottom-8 right-8"
+        className="absolute bottom-4 sm:bottom-6 md:bottom-8 right-4 sm:right-6 md:right-8"
       >
-        <div className="relative h-16 w-16">
+        <div className="relative h-10 w-10 sm:h-12 sm:w-12 md:h-16 md:w-16">
           <div className="absolute bottom-0 right-0 h-px w-full bg-gradient-to-l from-[#8C5695] to-transparent" />
           <div className="absolute bottom-0 right-0 h-full w-px bg-gradient-to-t from-[#8C5695] to-transparent" />
-          <div className="absolute bottom-0 right-0 h-2 w-2 rounded-full bg-[#8C5695]" />
+          <div className="absolute bottom-0 right-0 h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-[#8C5695]" />
         </div>
       </motion.div>
     </>
   );
 };
 
-// Simplified Scroll Indicator
+// Responsive Scroll Indicator
 const ScrollIndicator = () => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 3, duration: 1 }}
-      className="absolute bottom-8 left-1/2 -translate-x-1/2"
+      className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 hidden sm:block"
     >
       <motion.div
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
         className="flex flex-col items-center gap-2"
       >
-        {/* <span className="font-mono text-xs tracking-wider text-gray-500">SCROLL</span> */}
-        <div className="h-12 w-6 rounded-full border-2 border-[#8C5695]/40 bg-white/50 backdrop-blur-sm">
+        <div className="h-10 w-5 sm:h-12 sm:w-6 rounded-full border-2 border-[#8C5695]/40 bg-white/50 backdrop-blur-sm">
           <motion.div
             animate={{ y: [4, 16, 4] }}
             transition={{ duration: 2, repeat: Infinity }}
-            className="mx-auto mt-1 h-2 w-2 rounded-full bg-[#8C5695] shadow-lg shadow-[#8C5695]/50"
+            className="mx-auto mt-1 h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-[#8C5695] shadow-lg shadow-[#8C5695]/50"
           />
         </div>
       </motion.div>
@@ -409,9 +408,9 @@ const ScrollIndicator = () => {
 // Floating Orbs
 const FloatingOrbs = () => {
   const orbs = [
-    { size: 400, x: '10%', y: '20%', delay: 0, duration: 20 },
-    { size: 300, x: '80%', y: '60%', delay: 5, duration: 25 },
-    { size: 250, x: '60%', y: '80%', delay: 10, duration: 30 },
+    { size: 300, x: '10%', y: '20%', delay: 0, duration: 20 },
+    { size: 250, x: '80%', y: '60%', delay: 5, duration: 25 },
+    { size: 200, x: '60%', y: '80%', delay: 10, duration: 30 },
   ];
 
   return (

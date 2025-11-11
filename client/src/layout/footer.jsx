@@ -69,12 +69,12 @@ const Footer = () => {
               </p>
 
               {/* Social Links */}
-              <div className="flex gap-3">
+              {/* <div className="flex gap-3">
                 <SocialButton icon={Facebook} href="#" label="Facebook" />
                 <SocialButton icon={Twitter} href="#" label="Twitter" />
                 <SocialButton icon={Linkedin} href="#" label="LinkedIn" />
                 <SocialButton icon={Instagram} href="#" label="Instagram" />
-              </div>
+              </div> */}
 
               {/* Trust Badges */}
               <div className="mt-8 flex flex-wrap gap-6">

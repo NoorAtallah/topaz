@@ -265,10 +265,10 @@ const RotatingEarth = ({ width = 600, height = 600, className = "" }) => {
 
   if (error) {
     return (
-      <div className={`flex items-center justify-center rounded-2xl bg-gray-900 p-8 ${className}`}>
+      <div className={`flex items-center justify-center rounded-2xl bg-gray-900 p-6 sm:p-8 ${className}`}>
         <div className="text-center">
-          <p className="mb-2 font-semibold text-red-400">Error loading visualization</p>
-          <p className="text-sm text-gray-400">{error}</p>
+          <p className="mb-2 text-sm sm:text-base font-semibold text-red-400">Error loading visualization</p>
+          <p className="text-xs sm:text-sm text-gray-400">{error}</p>
         </div>
       </div>
     )
@@ -279,8 +279,8 @@ const RotatingEarth = ({ width = 600, height = 600, className = "" }) => {
       {isLoading && (
         <div className="absolute inset-0 flex items-center justify-center rounded-2xl bg-gradient-to-br from-[#1a0a1f] to-[#0a0510]">
           <div className="text-center">
-            <div className="mb-4 h-12 w-12 animate-spin rounded-full border-4 border-[#8C5695] border-t-transparent mx-auto"></div>
-            <p className="text-sm text-[#B590BF]">Loading Network...</p>
+            <div className="mb-4 h-10 w-10 sm:h-12 sm:w-12 animate-spin rounded-full border-4 border-[#8C5695] border-t-transparent mx-auto"></div>
+            <p className="text-xs sm:text-sm text-[#B590BF]">Loading Network...</p>
           </div>
         </div>
       )}
@@ -289,7 +289,7 @@ const RotatingEarth = ({ width = 600, height = 600, className = "" }) => {
         className="w-full h-auto rounded-2xl"
         style={{ maxWidth: "100%", height: "auto" }}
       />
-      <div className="absolute bottom-4 left-4 rounded-md bg-black/60 px-3 py-2 text-xs text-[#B590BF] backdrop-blur-sm">
+      <div className="absolute bottom-2 left-2 sm:bottom-4 sm:left-4 rounded-md bg-black/60 px-2 py-1.5 sm:px-3 sm:py-2 text-[10px] sm:text-xs text-[#B590BF] backdrop-blur-sm">
         Drag to rotate • Scroll to zoom
       </div>
     </div>
@@ -305,8 +305,8 @@ const GlobalNetworkSection = () => {
   ]
 
   return (
-   <div className="container mx-auto px-6 py-24 xl:px-12 bg-white">
-      <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-16 sm:py-20 md:py-24 bg-white">
+      <div className="grid gap-8 sm:gap-10 md:gap-12 lg:grid-cols-2 lg:gap-16 items-center">
         {/* Left Side - Globe */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -316,7 +316,7 @@ const GlobalNetworkSection = () => {
           className="relative order-2 lg:order-1"
         >
           {/* Glow effect */}
-          <div className="pointer-events-none absolute inset-0 -m-10 rounded-full bg-gradient-to-br from-[#8C5695]/20 to-[#986AA1]/20 blur-3xl" />
+          <div className="pointer-events-none absolute inset-0 -m-6 sm:-m-10 rounded-full bg-gradient-to-br from-[#8C5695]/20 to-[#986AA1]/20 blur-3xl" />
           
           <RotatingEarth 
             width={600} 
@@ -337,22 +337,22 @@ const GlobalNetworkSection = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-6"
+            className="mb-4 sm:mb-6"
           >
-            <span className="inline-flex items-center gap-2 rounded-full border border-[#8C5695]/20 bg-white px-6 py-2 text-sm font-semibold text-[#8C5695] shadow-sm">
-              <span className="h-2 w-2 animate-pulse rounded-full bg-[#8C5695]" />
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#8C5695]/20 bg-white px-4 py-1.5 sm:px-6 sm:py-2 text-xs sm:text-sm font-semibold text-[#8C5695] shadow-sm">
+              <span className="h-1.5 w-1.5 sm:h-2 sm:w-2 animate-pulse rounded-full bg-[#8C5695]" />
               Global Infrastructure
             </span>
           </motion.div>
 
-          <h2 className="mb-6 text-4xl font-black tracking-tight md:text-5xl lg:text-6xl">
+          <h2 className="mb-4 sm:mb-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-tight">
             Powering Businesses{" "}
             <span className="bg-gradient-to-r from-[#8C5695] to-[#986AA1] bg-clip-text text-transparent">
               Around the World
             </span>
           </h2>
 
-          <p className="mb-8 text-lg text-gray-600 leading-relaxed">
+          <p className="mb-6 sm:mb-8 text-base sm:text-lg text-gray-600 leading-relaxed">
             Our extensive global network ensures your applications run at peak performance 
             no matter where your users are located. With data centers strategically 
             positioned across continents, we deliver lightning-fast speeds and 
@@ -360,7 +360,7 @@ const GlobalNetworkSection = () => {
           </p>
 
           {/* Stats Grid */}
-          <div className="grid grid-cols-2 gap-4 mb-8">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
             {stats.map((stat, index) => (
               <motion.div
                 key={index}
@@ -368,13 +368,13 @@ const GlobalNetworkSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 * index }}
-                className="rounded-2xl border border-white/20 bg-white/40 p-6 backdrop-blur-xl shadow-lg hover:shadow-xl transition-all"
+                className="rounded-xl sm:rounded-2xl border border-white/20 bg-white/40 p-4 sm:p-6 backdrop-blur-xl shadow-lg hover:shadow-xl transition-all"
               >
-                <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#8C5695] to-[#986AA1]">
-                  <stat.icon className="h-6 w-6 text-white" />
+                <div className="mb-2 sm:mb-3 flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-lg sm:rounded-xl bg-gradient-to-br from-[#8C5695] to-[#986AA1]">
+                  <stat.icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                 </div>
-                <div className="text-3xl font-black text-[#8C5695] mb-1">{stat.value}</div>
-                <div className="text-sm font-medium text-gray-600">{stat.label}</div>
+                <div className="text-2xl sm:text-3xl font-black text-[#8C5695] mb-0.5 sm:mb-1">{stat.value}</div>
+                <div className="text-xs sm:text-sm font-medium text-gray-600">{stat.label}</div>
               </motion.div>
             ))}
           </div>
@@ -385,7 +385,7 @@ const GlobalNetworkSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
-            className="space-y-3"
+            className="space-y-2.5 sm:space-y-3"
           >
             {[
               "Low-latency connections worldwide",
@@ -393,13 +393,13 @@ const GlobalNetworkSection = () => {
               "DDoS protection on all servers",
               "Real-time performance monitoring"
             ].map((feature, index) => (
-              <div key={index} className="flex items-center gap-3">
-                <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#8C5695] to-[#986AA1]">
-                  <svg className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div key={index} className="flex items-center gap-2.5 sm:gap-3">
+                <div className="flex h-5 w-5 sm:h-6 sm:w-6 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#8C5695] to-[#986AA1]">
+                  <svg className="h-3 w-3 sm:h-4 sm:w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <span className="font-medium text-gray-700">{feature}</span>
+                <span className="text-sm sm:text-base font-medium text-gray-700">{feature}</span>
               </div>
             ))}
           </motion.div>
@@ -410,12 +410,12 @@ const GlobalNetworkSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.6 }}
-            className="mt-8"
+            className="mt-6 sm:mt-8"
           >
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="rounded-xl bg-gradient-to-r from-[#8C5695] to-[#986AA1] px-8 py-4 font-bold text-white shadow-lg transition-all hover:shadow-[0_10px_40px_-10px_rgba(140,86,149,0.5)]"
+              className="w-full sm:w-auto rounded-xl bg-gradient-to-r from-[#8C5695] to-[#986AA1] px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base font-bold text-white shadow-lg transition-all hover:shadow-[0_10px_40px_-10px_rgba(140,86,149,0.5)]"
             >
               Explore Our Network
             </motion.button>
